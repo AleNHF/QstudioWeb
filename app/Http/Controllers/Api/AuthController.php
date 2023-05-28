@@ -75,7 +75,6 @@ class AuthController extends BaseController
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'birthDay' => 'required|date',
-            'gender' => 'required|string|max:1',
             'phoneNumber' => 'required|numeric',
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:8',
@@ -98,7 +97,6 @@ class AuthController extends BaseController
             'lastname' => $input['lastname'],
             'birthDay' => $input['birthDay'],
             'phoneNumber' => $input['phoneNumber'],
-            'gender' => $input['gender'],
             'user_id' => $user->id
         ]);
         

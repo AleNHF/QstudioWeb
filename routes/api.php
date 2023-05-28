@@ -50,7 +50,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('content/index', [App\Http\Controllers\API\ContentController::class, 'index']);
     Route::get('content/quantity', [App\Http\Controllers\API\ContentController::class, 'quantity_of_content']);
     Route::get('content/{idKid}', [App\Http\Controllers\API\ContentController::class, 'contentXKid']);
-    Route::get('content/children', [App\Http\Controllers\API\ContentController::class, 'contentXChildren']);
+    Route::get('content/children/index', [App\Http\Controllers\API\ContentController::class, 'contentXChildren']);
     Route::post('content/store', [App\Http\Controllers\API\ContentController::class, 'store']);
     Route::put('content/{id}', [App\Http\Controllers\API\ContentController::class, 'update']);
     Route::get('content/{id}', [App\Http\Controllers\API\ContentController::class, 'show']);

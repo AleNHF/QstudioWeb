@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Calls;
-use App\Models\Contacts;
+use App\Models\Call;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use Illuminate\Support\Facades\Auth;
@@ -12,14 +12,14 @@ use Validator;
 class CallController extends BaseController
 {
     /**
-     * This endpoint is for calls list into the app tutor
+     * This endpoint is for Call list into the app tutor
      */
     public function getCallsXContact($id) 
     {
-        $contact = Contacts::findOrFail($id);
+        $contact = Contact::findOrFail($id);
 
         if (isset($contact)) {
-            $calls = Calls::where(['contacts_id' => $contact->id])->get();
+            $calls = Call::where(['contact_id' => $contact->id])->get();
 
             return $this->sendResponse($calls, "Call list of this contact.");
         } else {
@@ -28,21 +28,21 @@ class CallController extends BaseController
     }
 
     /**
-     * This endpoint is for store calls
+     * This endpoint is for store Call
      */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'received' => 'required',
             'date' => 'required|string|max:500',
-            'contacts_id' => 'required',
+            'contact_id' => 'required',
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $call = Calls::create($request->all());
+        $call = Call::create($request->all());
 
         return $this->sendResponse($call, "File saved successfully.");
     }
@@ -52,7 +52,7 @@ class CallController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        $call = Calls::findOrFail($id);
+        $call = Call::findOrFail($id);
         
         if (isset($call)) {
             $call->update($request->all());
@@ -68,7 +68,7 @@ class CallController extends BaseController
      */
     public function show($id)
     {
-        $call = Calls::findOrFail($id);
+        $call = Call::findOrFail($id);
 
         if (isset($call)) {
             return $this->sendResponse($call, "Contact found");
@@ -85,7 +85,7 @@ class CallController extends BaseController
         $user = Auth::user();
 
         if (isset($user)) {
-            $call = Calls::findOrFail($id);
+            $call = Call::findOrFail($id);
             if (isset($call)) {
                 $call->delete();
                 return $this->sendResponse($call, "Contact has deleted.");

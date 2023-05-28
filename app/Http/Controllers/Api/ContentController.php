@@ -82,7 +82,7 @@ class ContentController extends BaseController
      */
     public function contentXChildren()
     {
-        $user = Auth::user()->id;
+        $user = User::findOrFail(Auth::user()->id);
 
         if ($user != null) {
             $collection = new Collection();

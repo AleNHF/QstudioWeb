@@ -18,7 +18,6 @@ class CreateTutorsTable extends Migration
             $table->string('name');
             $table->string('lastname');
             $table->date('birthDay');
-            $table->char('gender', 1);
             $table->string('phoneNumber');
             $table->string('profilePhoto')->nullable();
             $table->boolean('isActive')->default(true); //Users are actived when they have a plan

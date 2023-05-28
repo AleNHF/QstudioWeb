@@ -18,10 +18,10 @@ class CreateCallsTable extends Migration
             $table->boolean('received');
             $table->date('date');
             $table->string('duration');
-            $table->unsignedBigInteger('contacts_id');
+            $table->unsignedBigInteger('contact_id');
             $table->timestamps();
 
-            $table->foreign('contacts_id')->references('id')->on('contacts')->onDelete('cascade');           
+            $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');           
         });
     }
 

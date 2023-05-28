@@ -45,8 +45,6 @@ class User extends Authenticatable
 
      public function tutor(){
         return $this->hasOne(Tutor::class, 'user_id');
-    }
-
-    
+    }  
 }
 

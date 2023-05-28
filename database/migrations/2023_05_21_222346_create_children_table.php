@@ -19,7 +19,7 @@ class CreateChildrenTable extends Migration
             $table->string('lastname');
             $table->date('birthDay');
             $table->char('gender', 1);
-            $table->string('alias');
+            $table->string('alias')->nullable();
             $table->string('profilePhoto')->nullable();
             $table->unsignedBigInteger('tutor_id');
             $table->timestamps();

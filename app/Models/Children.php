@@ -16,6 +16,7 @@ class Children extends Model
         'alias',
         'birthDay',
         'gender',
+        'profilePhoto',
         'tutor_id'
     ];
 
@@ -36,6 +37,6 @@ class Children extends Model
 
     public function contacts()
     {
-        return $this->hasMany(Contacts::class, 'children_id');
+        return $this->hasMany(Contact::class, 'children_id');
     }
 }

@@ -22,7 +22,7 @@ class Planes extends Model
         return $this->hasMany(Tutor::class, 'plan_id');
     }
 
-    public function suscription(){
-        return $this->hasMany('App\Models\Suscription');
+    public function subscription(){
+        return $this->hasMany('App\Models\Subscription');
     }
 }
