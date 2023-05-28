@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTokenTable extends Migration
+class CreateLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateTokenTable extends Migration
      */
     public function up()
     {
-        Schema::create('token', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->date('createDate');
-            $table->date('status');
-            $table->date('registerDate');
+            $table->string('coordinates');
+            $table->time('time');
+            $table->date('date');
             $table->unsignedBigInteger('children_id');
+
             $table->timestamps();
 
-            $table->foreign('children_id')->references('id')->on('children')->onDelete('cascade');
+            $table->foreign('children_id')->references('id')->on('children')->onDelete('cascade');            
         });
     }
 
@@ -33,6 +33,6 @@ class CreateTokenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('token');
+        Schema::dropIfExists('locations');
     }
 }

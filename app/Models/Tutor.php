@@ -13,7 +13,7 @@ class Tutor extends Model
         'name',
         'lastname',
         'birthDay',
-        'gender',
+        'isActive',
         'phoneNumber',
         'profilePhoto',
         'user_id'
@@ -34,7 +34,7 @@ class Tutor extends Model
         return $this->belongsToMany('App\Models\Plan', 'subscriptions');
     }
 
-    public function suscription(){
-        return $this->belongsToMany('App\Models\Suscription');
+    public function subscription(){
+        return $this->belongsToMany('App\Models\Subscription');
     }
 }

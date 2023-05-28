@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Calls extends Model
+class Call extends Model
 {
     use HasFactory;
     protected $fillable = [
         'received',
         'date',
         'duration',
-        'contacts_id',
+        'contact_id',
     ];
 
     public function contacts()

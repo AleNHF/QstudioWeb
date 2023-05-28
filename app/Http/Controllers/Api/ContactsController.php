@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Children;
-use App\Models\Contacts;
+use App\Models\Contact;
 use App\Models\Tutor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
@@ -44,7 +44,7 @@ class ContactsController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $contact = new Contacts();
+        $contact = new Contact();
         $contact->name = $request->name;
         $contact->phoneNumber = $request->phoneNumber;
         $contact->children_id = $request->children_id;
@@ -58,7 +58,7 @@ class ContactsController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        $contact = Contacts::findOrFail($id);
+        $contact = Contact::findOrFail($id);
         
         if (isset($contact)) {
             $contact->update($request->all());
@@ -74,7 +74,7 @@ class ContactsController extends BaseController
      */
     public function show($id)
     {
-        $contact = Contacts::findOrFail($id);
+        $contact = Contact::findOrFail($id);
 
         if (isset($contact)) {
             return $this->sendResponse($contact, "Contact found");
@@ -91,7 +91,7 @@ class ContactsController extends BaseController
         $user = Auth::user();
 
         if (isset($user)) {
-            $contact = Contacts::findOrFail($id);
+            $contact = Contact::findOrFail($id);
             if (isset($contact)) {
                 $contact->delete();
                 return $this->sendResponse($contact, "Contact has deleted.");

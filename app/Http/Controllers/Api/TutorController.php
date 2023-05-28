@@ -47,7 +47,6 @@ class TutorController extends BaseController
             $tutor->name = $input['name'];
             $tutor->lastname = $input['lastname'];
             $tutor->birthDay = $input['birthDay'];
-            $tutor->gender = $input['gender'];
             $tutor->phoneNumber = $input['phoneNumber'];
             $tutor->save();
 
