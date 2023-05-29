@@ -54,5 +54,11 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post('content/store', [App\Http\Controllers\API\ContentController::class, 'store']);
     Route::put('content/{id}', [App\Http\Controllers\API\ContentController::class, 'update']);
     Route::get('content/{id}', [App\Http\Controllers\API\ContentController::class, 'show']);
-    Route::delete('content/{id}', [App\Http\Controllers\API\CallController::class, 'destroy']);
+    Route::delete('content/{id}', [App\Http\Controllers\API\ContentController::class, 'destroy']);
+    // TODO: Endpoints for control image with AWS
+    Route::post('content/controlCamera', [App\Http\Controllers\API\ContentController::class, 'imageControlCamera']);
+    Route::post('content/controlDownload', [App\Http\Controllers\API\ContentController::class, 'imageControlDownload']);
+    Route::post('content/controlFacebook', [App\Http\Controllers\API\ContentController::class, 'imageControlFacebook']);
+    Route::post('content/controlTelegram', [App\Http\Controllers\API\ContentController::class, 'imageControlTelegram']);
+    Route::post('content/controlCapture', [App\Http\Controllers\API\ContentController::class, 'imageControlCapture']);
 });
