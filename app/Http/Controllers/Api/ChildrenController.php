@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 
 class ChildrenController extends BaseController
@@ -34,12 +35,23 @@ class ChildrenController extends BaseController
         $user = User::find(Auth::user()->id);
         $tutor = Tutor::where(['user_id' => $user->id])->first();
 
+        if ($request->hasFile('profilePhoto')) {
+            $folder = "public/children";
+            $profile = $request->file('profilePhoto')->store($folder); //Storage::disk('local')->put($folder, $request->image, 'public');
+            $url = Storage::url($profile);
+        } else {
+            $url = $request->gender == 'F' ? 
+                'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043252-child-girl-kid-person_113255.png' : 
+                'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043235-afro-boy-child-kid_113264.png';
+        }
+
         $kid = Children::create([
             'name' => $input['name'],
             'lastname' => $input['lastname'],
             'alias' => $input['alias'],
             'gender' => $input['gender'],
             'birthDay' => $input['birthDay'],
+            'profilePhoto' => $url,
             'tutor_id' => $tutor->id
         ]);
 

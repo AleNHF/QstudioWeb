@@ -36,7 +36,8 @@ class TutorController extends BaseController
                 }
                 $imagen = $request->file('profilePhoto')->store($folder);   
                 $url = Storage::url($imagen);
-                $tutor->profilePhoto = $url;
+            } else {
+                $url = 'https://cdn-icons-png.flaticon.com/512/6596/6596121.png';
             }
 
             $user->name = $input['name'];
@@ -48,6 +49,7 @@ class TutorController extends BaseController
             $tutor->lastname = $input['lastname'];
             $tutor->birthDay = $input['birthDay'];
             $tutor->phoneNumber = $input['phoneNumber'];
+            $tutor->profilePhoto = $url;
             $tutor->save();
 
             $result = [
@@ -72,9 +74,9 @@ class TutorController extends BaseController
         $children = $tutor->children;
         $countChildren = $children->count();
 
-        foreach ($children as $child) {
+        /*foreach ($children as $child) {
             $child->profilePhoto = 'https://picsum.photos/200';
-        }
+        }*/
 
         $result = [
             'totalRecords' => $countChildren,

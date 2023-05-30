@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCallsTable extends Migration
+class CreateExpotokensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateCallsTable extends Migration
      */
     public function up()
     {
-        Schema::create('calls', function (Blueprint $table) {
+        Schema::create('expotokens', function (Blueprint $table) {
             $table->id();
-            $table->boolean('received');
-            $table->date('date');
-            $table->string('duration')->nullable();
-            $table->unsignedBigInteger('contact_id');
+            $table->string('expo_token');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');           
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
         });
     }
 
@@ -32,6 +30,6 @@ class CreateCallsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('calls');
+        Schema::dropIfExists('expotokens');
     }
 }
