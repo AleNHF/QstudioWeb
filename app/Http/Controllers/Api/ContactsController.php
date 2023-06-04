@@ -61,7 +61,11 @@ class ContactsController extends BaseController
         $contact = Contact::findOrFail($id);
         
         if (isset($contact)) {
-            $contact->update($request->all());
+            $contact->name = $request->name;
+            $contact->phoneNumber = $request->phoneNumber;
+            $contact->children_id = $request->children_id;
+            $contact->save();
+            //$contact->update($request->all());
 
             return $this->sendResponse($contact, "Contact updated successfully.");
         }

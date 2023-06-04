@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Calls;
+use App\Events\ContentNotificationEvent;
 use App\Models\Children;
 use App\Models\Content;
 use App\Models\Tutor;
@@ -128,10 +128,10 @@ class ContentController extends BaseController
         }
 
         $kid = Children::findOrFail($request->children_id);
-        $user = User::find($kid->tutor->id);
+        $user = User::find($kid->tutor->user->id);
         $content = Content::create($request->all());
 
-        //event(new NotificationContenidoEvent($user, $contenido));
+        event(new ContentNotificationEvent($user, $content));
 
         return $this->sendResponse($content, "Content was created successfully.");
     }

@@ -16,9 +16,9 @@ class CreateTokensTable extends Migration
         Schema::create('tokens', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->date('createDate');
-            $table->date('status');
-            $table->date('registerDate');
+            $table->dateTime('createDate');
+            $table->char('status', 1);
+            $table->dateTime('registerDate')->nullable();
             $table->unsignedBigInteger('children_id');
             $table->timestamps();
 

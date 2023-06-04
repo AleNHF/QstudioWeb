@@ -34,7 +34,7 @@ class CallController extends BaseController
     {
         $validator = Validator::make($request->all(), [
             'received' => 'required',
-            'date' => 'required|string|max:500',
+            'date' => 'required|date',
             'contact_id' => 'required',
         ]);
 
@@ -42,9 +42,14 @@ class CallController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $call = Call::create($request->all());
+        $call = Call::create([
+            'received' => $request->received,
+            'date' => $request->date,
+            'duration' => $request->duration,
+            'contact_id' => $request->contact_id
+        ]);
 
-        return $this->sendResponse($call, "File saved successfully.");
+        return $this->sendResponse($call, "Call saved successfully.");
     }
 
     /**

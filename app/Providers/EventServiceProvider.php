@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\ContentNotificationEvent;
+use App\Events\PushNotificationEvent;
+use App\Listeners\ContentNotificationListener;
+use App\Listeners\PushNotificationListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +21,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        PushNotificationEvent::class => [
+            PushNotificationListener::class,
+        ],
+        ContentNotificationEvent::class => [
+            ContentNotificationListener::class,
         ],
     ];
 

@@ -15,9 +15,9 @@ class LocationController extends BaseController
     /**
      * This endpoint is for store coordinates of a kid
      */
-    public function getLocationXKid(Request $request)
+    public function getLocationXKid($kidId)
     {
-        $kid = Children::findOrFail($request->children_id);
+        $kid = Children::findOrFail($kidId);
         $tutor = Tutor::find($kid->tutor_id);
         
         if (Auth::user()->id == $tutor->user_id) {
@@ -49,12 +49,7 @@ class LocationController extends BaseController
         $tutor = Tutor::find($kid->tutor_id);
 
         if (Auth::user()->id == $tutor->user_id) {
-            $location = Location::create([
-                'coordinates' => $request->coordinates,
-                'date' => $request->date,
-                'time' => $request->time,
-                'children_id' => $kid->id
-            ]);
+            $location = Location::create($request->all());
 
             return $this->sendResponse($location, "Location saved successfully");
         }

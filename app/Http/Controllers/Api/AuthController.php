@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\API\BaseController as BaseController;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 
 class AuthController extends BaseController
@@ -91,12 +92,21 @@ class AuthController extends BaseController
             'email' => $input['email'],
             'password' => bcrypt($input['password']),
         ]);
+
+        if ($request->hasFile('foto')) {
+            $folder = "public/profiles";
+            $profile = $request->file('profilePhoto')->store($folder); //Storage::disk('local')->put($folder, $request->image, 'public');
+            $url = Storage::url($profile);
+        } else {
+            $url = null;
+        }
         
         Tutor::create([
             'name' => $input['name'],
             'lastname' => $input['lastname'],
             'birthDay' => $input['birthDay'],
             'phoneNumber' => $input['phoneNumber'],
+            'profilePhoto' => $url,
             'user_id' => $user->id
         ]);
         
