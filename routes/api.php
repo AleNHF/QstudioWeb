@@ -2,7 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CallController;
+use App\Http\Controllers\Api\ChildrenController;
+use App\Http\Controllers\Api\ContactsController;
+use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\ExpoTokenController;
+use App\Http\Controllers\Api\FileController;
+use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\RekognitionController;
 use App\Http\Controllers\Api\TutorController;
 
 /*
@@ -31,57 +38,57 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post('profile', [AuthController::class, 'profile']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('profile/update', [TutorController::class, 'update']);
-    Route::get('getChildren', [App\Http\Controllers\API\TutorController::class, 'getChildren']);
+    Route::get('getChildren', [TutorController::class, 'getChildren']);
     //Route::get('/delete-token', [App\Http\Controllers\API\ExpoTokenController::class, 'deleteExpotoken']);
 
-    Route::post('children/store', [App\Http\Controllers\API\ChildrenController::class, 'store']);
+    Route::post('children/store', [ChildrenController::class, 'store']);
 
     Route::prefix('location')->group(function () {
-        Route::post('/store', [App\Http\Controllers\API\LocationController::class, 'store']);
-        Route::get('/kid/{kidId}', [App\Http\Controllers\API\LocationController::class, 'getLocationXKid']);
+        Route::post('/store', [LocationController::class, 'store']);
+        Route::get('/kid/{kidId}', [LocationController::class, 'getLocationXKid']);
     });
 
     Route::prefix('file')->group(function () {
-        Route::get('/kid/{idkid}', [App\Http\Controllers\API\FileController::class, 'getFilesXKid']);
-        Route::post('/', [App\Http\Controllers\API\FileController::class, 'store']);
-        Route::post('/{id}', [App\Http\Controllers\API\FileController::class, 'update']);
-        Route::get('/{id}', [App\Http\Controllers\API\FileController::class, 'show']);
-        Route::delete('/{id}', [App\Http\Controllers\API\FileController::class, 'destroy']);
+        Route::get('/kid/{idkid}', [FileController::class, 'getFilesXKid']);
+        Route::post('/', [FileController::class, 'store']);
+        Route::post('/{id}', [FileController::class, 'update']);
+        Route::get('/{id}', [FileController::class, 'show']);
+        Route::delete('/{id}', [FileController::class, 'destroy']);
     });
 
     Route::prefix('contact')->group(function () {
-        Route::get('/kid/{idkid}', [App\Http\Controllers\API\ContactsController::class, 'getContactsXKid']);
-        Route::post('/', [App\Http\Controllers\API\ContactsController::class, 'store']);
-        Route::post('/{id}', [App\Http\Controllers\API\ContactsController::class, 'update']);
-        Route::get('/{id}', [App\Http\Controllers\API\ContactsController::class, 'show']);
-        Route::delete('/{id}', [App\Http\Controllers\API\ContactsController::class, 'destroy']);
-        Route::get('/call/{idcontact}', [App\Http\Controllers\API\CallController::class, 'getCallsXContact']);
+        Route::get('/kid/{idkid}', [ContactsController::class, 'getContactsXKid']);
+        Route::post('/', [ContactsController::class, 'store']);
+        Route::post('/{id}', [ContactsController::class, 'update']);
+        Route::get('/{id}', [ContactsController::class, 'show']);
+        Route::delete('/{id}', [ContactsController::class, 'destroy']);
+        Route::get('/call/{idcontact}', [CallController::class, 'getCallsXContact']);
     });
 
     Route::prefix('call')->group(function () {
-        Route::post('/store', [App\Http\Controllers\API\CallController::class, 'store']);
-        Route::post('/{id}', [App\Http\Controllers\API\CallController::class, 'update']);
-        Route::get('/{id}', [App\Http\Controllers\API\CallController::class, 'show']);
-        Route::delete('/{id}', [App\Http\Controllers\API\CallController::class, 'destroy']);
+        Route::post('/store', [CallController::class, 'store']);
+        Route::post('/{id}', [CallController::class, 'update']);
+        Route::get('/{id}', [CallController::class, 'show']);
+        Route::delete('/{id}', [CallController::class, 'destroy']);
     });
 
     Route::prefix('content')->group(function () {
-        Route::post('/store', [App\Http\Controllers\API\ContentController::class, 'store']);
-        Route::post('/{id}', [App\Http\Controllers\API\ContentController::class, 'update']);
-        Route::get('/{id}', [App\Http\Controllers\API\ContentController::class, 'show']);
-        Route::delete('/{id}', [App\Http\Controllers\API\ContentController::class, 'destroy']);
-        Route::get('/', [App\Http\Controllers\API\ContentController::class, 'index']);
-        Route::get('/index/quantity', [App\Http\Controllers\API\ContentController::class, 'quantity_of_content']);
-        Route::get('/kid/{idKid}', [App\Http\Controllers\API\ContentController::class, 'contentXKid']);
-        Route::get('/children/index', [App\Http\Controllers\API\ContentController::class, 'contentXChildren']);
+        Route::post('/store', [ContentController::class, 'store']);
+        Route::post('/{id}', [ContentController::class, 'update']);
+        Route::get('/{id}', [ContentController::class, 'show']);
+        Route::delete('/{id}', [ContentController::class, 'destroy']);
+        Route::get('/', [ContentController::class, 'index']);
+        Route::get('/index/quantity', [ContentController::class, 'quantity_of_content']);
+        Route::get('/kid/{idKid}', [ContentController::class, 'contentXKid']);
+        Route::get('/children/index', [ContentController::class, 'contentXChildren']);
     });
   
     // TODO: Endpoints for control image with AWS
     Route::prefix('rekognition')->group(function () {
-        Route::post('/controlCamera', [App\Http\Controllers\API\RekognitionController::class, 'imageControlCamera']);
-        Route::post('/controlDownload', [App\Http\Controllers\API\RekognitionController::class, 'imageControlDownload']);
-        Route::post('/controlFacebook', [App\Http\Controllers\API\RekognitionController::class, 'imageControlFacebook']);
-        Route::post('/controlTelegram', [App\Http\Controllers\API\RekognitionController::class, 'imageControlTelegram']);
-        Route::post('/controlDocument', [App\Http\Controllers\API\RekognitionController::class, 'documentControl']);
+        Route::post('/controlCamera', [RekognitionController::class, 'imageControlCamera']);
+        Route::post('/controlDownload', [RekognitionController::class, 'imageControlDownload']);
+        Route::post('/controlFacebook', [RekognitionController::class, 'imageControlFacebook']);
+        Route::post('/controlTelegram', [RekognitionController::class, 'imageControlTelegram']);
+        Route::post('/controlDocument', [RekognitionController::class, 'documentControl']);
     });
 });
