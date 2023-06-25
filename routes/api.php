@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ExpoTokenController;
+use App\Http\Controllers\Api\TutorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,19 +18,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',function(){
     return "hola";
 });
-Route::post('register', [App\Http\Controllers\API\AuthController::class, 'register']);
-Route::post('login', [App\Http\Controllers\API\AuthController::class, 'login']);
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 
-Route::controller(App\Http\Controllers\API\ExpoTokenController::class)->group(function () {
+Route::controller(ExpoTokenController::class)->group(function () {
     Route::post('/register-token-kid', 'registerTokenLogin');
     Route::post('/register-notification', 'registerExpotoken');
     Route::post('/send-token', 'sendToken');
 });
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
-    Route::post('profile', [App\Http\Controllers\API\AuthController::class, 'profile']);
-    Route::post('logout', [App\Http\Controllers\API\AuthController::class, 'logout']);
-    Route::post('profile/update', [App\Http\Controllers\API\TutorController::class, 'update']);
+    Route::post('profile', [AuthController::class, 'profile']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('profile/update', [TutorController::class, 'update']);
     Route::get('getChildren', [App\Http\Controllers\API\TutorController::class, 'getChildren']);
     //Route::get('/delete-token', [App\Http\Controllers\API\ExpoTokenController::class, 'deleteExpotoken']);
 
