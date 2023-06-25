@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\CallController;
 use App\Http\Controllers\Api\ChildrenController;
 use App\Http\Controllers\Api\ContactsController;
 use App\Http\Controllers\Api\ContentController;
-use App\Http\Controllers\Api\ExpoTokenController;
+use App\Http\Controllers\Api\ExpotokenController;
 use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\RekognitionController;
@@ -28,7 +28,7 @@ Route::get('/',function(){
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
-Route::controller(ExpoTokenController::class)->group(function () {
+Route::controller(ExpotokenController::class)->group(function () {
     Route::post('/register-token-kid', 'registerTokenLogin');
     Route::post('/register-notification', 'registerExpotoken');
     Route::post('/send-token', 'sendToken');
