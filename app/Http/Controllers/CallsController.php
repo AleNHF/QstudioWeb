@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Call;
 use App\Models\Calls;
 use Illuminate\Http\Request;
 
@@ -44,7 +45,7 @@ class CallsController extends Controller
      * @param  \App\Models\Calls  $calls
      * @return \Illuminate\Http\Response
      */
-    public function show(Calls $calls)
+    public function show(Call $calls)
     {
         //
     }
@@ -55,7 +56,7 @@ class CallsController extends Controller
      * @param  \App\Models\Calls  $calls
      * @return \Illuminate\Http\Response
      */
-    public function edit(Calls $calls)
+    public function edit(Call $calls)
     {
         //
     }
@@ -67,7 +68,7 @@ class CallsController extends Controller
      * @param  \App\Models\Calls  $calls
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Calls $calls)
+    public function update(Request $request, Call $calls)
     {
         //
     }
@@ -78,7 +79,7 @@ class CallsController extends Controller
      * @param  \App\Models\Calls  $calls
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Calls $calls)
+    public function destroy(Call $calls)
     {
         //
     }

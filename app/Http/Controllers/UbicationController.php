@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ubication;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class UbicationController extends Controller
@@ -44,7 +44,7 @@ class UbicationController extends Controller
      * @param  \App\Models\Ubication  $ubication
      * @return \Illuminate\Http\Response
      */
-    public function show(Ubication $ubication)
+    public function show(Location $Location)
     {
         //
     }
@@ -52,10 +52,10 @@ class UbicationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ubication  $ubication
+     * @param  \App\Models\Location  $Location
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ubication $ubication)
+    public function edit(Location $Location)
     {
         //
     }
@@ -64,10 +64,10 @@ class UbicationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ubication  $ubication
+     * @param  \App\Models\Location  $Location
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ubication $ubication)
+    public function update(Request $request, Location $Location)
     {
         //
     }
@@ -75,10 +75,10 @@ class UbicationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ubication  $ubication
+     * @param  \App\Models\Location  $Location
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ubication $ubication)
+    public function destroy(Location $Location)
     {
         //
     }
