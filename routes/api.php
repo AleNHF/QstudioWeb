@@ -70,7 +70,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
         Route::get('/kid/{idKid}', [App\Http\Controllers\API\ContentController::class, 'contentXKid']);
         Route::get('/children/index', [App\Http\Controllers\API\ContentController::class, 'contentXChildren']);
     });
-  
+
     // TODO: Endpoints for control image with AWS
     Route::prefix('rekognition')->group(function () {
         Route::post('/controlCamera', [App\Http\Controllers\API\RekognitionController::class, 'imageControlCamera']);
