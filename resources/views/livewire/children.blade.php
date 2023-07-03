@@ -1,9 +1,10 @@
 
 <div>
    <br>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4 d-flex">
         @foreach ($child as $child)
-        <div class="col">
+        <div class="col d-flex">
+            <a href="{{ route('welcome') }}" class="card-link">
             <div class="card">
                 <div class="content">
                     <div class="image">
@@ -17,6 +18,7 @@
                     <button type="button" class="btn btn-light" wire:click="delete({{ $child->id }})">Eliminar</button>
                 </div>
             </div>
+            </a>
         </div>
         @endforeach 
         <div class="col text-center" style="margin-top: 78px; ">
@@ -29,9 +31,7 @@
         </button>
         </div>
     </div>
-  
-    <br>
-    
+ 
 
 
 @include('components.modalheader')
