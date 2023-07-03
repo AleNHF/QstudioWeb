@@ -105,9 +105,9 @@ class ExpoTokenController extends BaseController
 
             if ($token == '') {
                 if ($token = Token::where('code', $request->token)->where('status', 1)->exists()) {
-                    return ['error' => 'Token registered!!'];
+                    return $this->sendError('Token registered!');
                 }
-                return ['error' => 'Token not found'];
+                //return $this->sendError('Token not found');
             }
 
             $token->status = 1;
