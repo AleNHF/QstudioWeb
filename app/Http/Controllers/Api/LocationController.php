@@ -6,9 +6,9 @@ use App\Models\Children;
 use App\Models\Location;
 use App\Models\Tutor;
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\BaseController as BaseController;
+use App\Http\Controllers\Api\BaseController as BaseController;
 use Illuminate\Support\Facades\Auth;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class LocationController extends BaseController
 {

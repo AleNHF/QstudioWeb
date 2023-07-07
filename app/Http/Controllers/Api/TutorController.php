@@ -7,7 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\API\BaseController as BaseController;
+use App\Http\Controllers\Api\BaseController as BaseController;
+use Carbon\Carbon;
 
 class TutorController extends BaseController
 {
@@ -15,7 +16,7 @@ class TutorController extends BaseController
      * This endpoint is for update profile of user tutor
      */
     public function update(Request $request)
-    {      
+    {
         $user = User::findOrFail(Auth::user()->id);
         $tutor = Tutor::where(['user_id' => $user->id])->first();
 
@@ -24,17 +25,17 @@ class TutorController extends BaseController
         }
 
         $input = $request->all();
-        
+
         if ($user->type == "T") {
             $url = null;
 
             if ($request->hasFile('profilePhoto')) {
                 $folder = "public/profiles";
                 //If the user enters, it is to update their profile photo, deleting the one they had
-                if ($tutor->profilePhoto != null) {          
+                if ($tutor->profilePhoto != null) {
                     Storage::delete($tutor->profilePhoto);
                 }
-                $imagen = $request->file('profilePhoto')->store($folder);   
+                $imagen = $request->file('profilePhoto')->store($folder);
                 $url = Storage::url($imagen);
             } else {
                 $url = 'https://cdn-icons-png.flaticon.com/512/6596/6596121.png';
@@ -53,7 +54,7 @@ class TutorController extends BaseController
             $tutor->save();
 
             $result = [
-                'user' => $user, 
+                'user' => $user,
                 'tutor' => $tutor
             ];
 
@@ -74,16 +75,18 @@ class TutorController extends BaseController
         $children = $tutor->children;
         $countChildren = $children->count();
 
-        /*foreach ($children as $child) {
-            $child->profilePhoto = 'https://picsum.photos/200';
-        }*/
-
         $result = [
             'totalRecords' => $countChildren,
-            $children,        
+            $children,
         ];
 
         if ($children != null) {
+            // Agregar el campo 'edad' a cada elemento en la colección
+            foreach ($children as $child) {
+                $fechaNacimiento = Carbon::parse($child->birthDay);
+                $child->age = $fechaNacimiento->diffInYears(Carbon::now());
+            }
+
             return $this->sendResponse($result, "This is a list of your children");
         } else {
             return $this->sendError('No Content.', 204);

@@ -44,7 +44,7 @@ class ContactsController extends Controller
      * @param  \App\Models\Contact  $contacts
      * @return \Illuminate\Http\Response
      */
-    public function show(Contacts $contacts)
+    public function show(Contact $contact)
     {
         //
     }
@@ -55,7 +55,7 @@ class ContactsController extends Controller
      * @param  \App\Models\Contacts  $contacts
      * @return \Illuminate\Http\Response
      */
-    public function edit(Contacts $contacts)
+    public function edit(Contact $contacts)
     {
         //
     }
@@ -67,7 +67,7 @@ class ContactsController extends Controller
      * @param  \App\Models\Contacts  $contacts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contacts $contacts)
+    public function update(Request $request, Contact $contacts)
     {
         //
     }
@@ -78,7 +78,7 @@ class ContactsController extends Controller
      * @param  \App\Models\Contacts  $contacts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contacts $contacts)
+    public function destroy(Contact $contacts)
     {
         //
     }
