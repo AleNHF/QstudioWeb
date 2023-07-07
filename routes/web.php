@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Livewire\Login;
+use App\Http\Livewire\Register;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ChildrenComponent;
 
@@ -20,3 +22,13 @@ Route::get('/', function () {
 
 
 Route::get('/children', ChildrenComponent::class)->name('children.render');
+
+
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
+Route::get('/register', Register::class);
+
+Route::get('/login', Login::class)->name('login');
+// Route::get('/register', Register::class)->name('register');
