@@ -15,27 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth'])->group(
-//     function () {
+Route::middleware(['auth'])->group( function () {
 
     Route::get('/', function () {
         return view('welcome');
     });
-
     Route::get('/welcome', function () {
         return view('welcome');
     });
-// });
+});
 
 
+Route::middleware('guest')->group( function () {
 
-
-// Route::get('/register', Register::class)->name('register');
-
-Route::get('/register', Register::class)->name('register.render');
-
-Route::get('/login', Login::class)->name('login.render');
-// Route::middleware('guest')->group(function () {
-
-
-// });
+    Route::get('/register', Register::class)->name('register.render');
+    Route::get('/login', Login::class)->name('login.render');
+});
