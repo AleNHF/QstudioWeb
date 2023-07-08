@@ -6,11 +6,6 @@
     <div class="row row-cols-1 row-cols-md-3 g-4 d-flex">
         @foreach ($child as $child)
         <div class="col d-flex">
-<<<<<<< HEAD
-            {{-- <a href="{{ route('welcome') }}" class="card-link"> --}}
-=======
-           
->>>>>>> 183ba63930679ae711666f0cb67d9ab6e1c91501
             <div class="card">
                 <div class="content">
                     <a href="{{ route('content.render', ['child' => $child->id]) }}" class="card-link" >
