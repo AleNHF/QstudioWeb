@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\ChildrenComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,5 @@ Route::get('/', function () {
     return view('inicio');
     // return view('front.index');
 });
+
+Route::get('/children', ChildrenComponent::class)->name('children.render');
