@@ -39,8 +39,8 @@
                 <li><a href="" class="active">INICIO</a></li>
                 <li><a href="">CONTÁCTENOS</a></li>
                 <li><a href="">NOSOTROS</a></li>
-				<li><a href="">LOGIN</a></li>
-				<li><a href="">REGISTRATE</a></li>
+				<li><a href="login">LOGIN</a></li>
+				<li><a href="register">REGISTRATE</a></li>
                 {{-- <li><a href="" class="active">INICIO</a></li>
                 <li><a href="{{ url('/contact')}}">CONTÁCTENOS</a></li>
                 <li><a href="{{ url('/nosotros')}}">NOSOTROS</a></li>
