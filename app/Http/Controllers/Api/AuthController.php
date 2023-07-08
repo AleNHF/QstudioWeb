@@ -6,9 +6,10 @@ use App\Models\Tutor;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\API\BaseController as BaseController;
+use App\Http\Controllers\Api\BaseController as BaseController;
 use Illuminate\Support\Facades\Storage;
-use Validator;
+use Illuminate\Support\Facades\Validator;
+
 
 class AuthController extends BaseController
 {
@@ -19,9 +20,28 @@ class AuthController extends BaseController
      */
     public function login(Request $request)
     {
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            return $this->sendError('Unauthorized', ['error' => 'Unauthorized']);
+        // start validatons
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|max:255,email',
+            'password' => 'required|min:8',
+        ]);
+        $validator->setCustomMessages([
+            'email.required' => 'El email es obligatorio',
+            'email.email' => 'El email debe ser un correo electronico',
+            'password.required' => 'La contraseña es obligatorio',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
         }
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            $user = User::where('email', $request->email)->first();
+            if (!$user) {
+                return $this->sendError('Validation Error.', ['email' => 'Correo electrónico no registrado.']);
+            }
+            return $this->sendError('Unauthorized', ['password' => 'La contraseña es errónea']);
+        }
+        // end validations
 
         $user = User::where('email', $request['email'])->firstOrFail();
 

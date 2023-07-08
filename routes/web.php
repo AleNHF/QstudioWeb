@@ -3,6 +3,7 @@
 use App\Http\Livewire\Login;
 use App\Http\Livewire\Register;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\ChildrenComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,11 @@ Route::middleware(['auth'])->group( function () {
 
     Route::get('/', function () {
         return view('welcome');
-    });
+    })->name('welcome');
+
+
+Route::get('/children', ChildrenComponent::class)->name('children.render');
+
     Route::get('/welcome', function () {
         return view('welcome');
     });

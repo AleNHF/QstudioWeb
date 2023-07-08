@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Models\Call;
 use App\Models\Contact;
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\BaseController as BaseController;
+use App\Http\Controllers\Api\BaseController as BaseController;
 use Illuminate\Support\Facades\Auth;
-use Validator;
+use Illuminate\Support\Facades\Validator;
+
 
 class CallController extends BaseController
 {
@@ -25,6 +26,21 @@ class CallController extends BaseController
         } else {
             return $this->sendError("No Content.", 204);
         }       
+    }
+
+    /**
+     * This endpoint is for Call list into the app tutor
+     */
+    public function getCallsxChildren($childrenId) 
+    {
+        $callModel = new Call();
+        $calls = $callModel->getCallsxChild($childrenId);
+
+        if (isset($calls)) {
+            return $this->sendResponse($calls, 'Listado de llamadas por niño');
+        }
+       
+        return $this->sendError('Algo salió mal');
     }
 
     /**
