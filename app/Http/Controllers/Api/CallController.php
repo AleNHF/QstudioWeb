@@ -29,6 +29,21 @@ class CallController extends BaseController
     }
 
     /**
+     * This endpoint is for Call list into the app tutor
+     */
+    public function getCallsxChildren($childrenId) 
+    {
+        $callModel = new Call();
+        $calls = $callModel->getCallsxChild($childrenId);
+
+        if (isset($calls)) {
+            return $this->sendResponse($calls, 'Listado de llamadas por niño');
+        }
+       
+        return $this->sendError('Algo salió mal');
+    }
+
+    /**
      * This endpoint is for store Call
      */
     public function store(Request $request)

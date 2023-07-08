@@ -62,8 +62,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
         Route::post('/', [ContactsController::class, 'store']);
         Route::post('/{id}', [ContactsController::class, 'update']);
         Route::get('/{id}', [ContactsController::class, 'show']);
-        Route::delete('/{id}', [ContactsController::class, 'destroy']);
-        Route::get('/call/{idcontact}', [CallController::class, 'getCallsXContact']);
+        Route::delete('/{id}', [ContactsController::class, 'destroy']);        
     });
 
     Route::prefix('call')->group(function () {
@@ -71,6 +70,8 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
         Route::post('/{id}', [CallController::class, 'update']);
         Route::get('/{id}', [CallController::class, 'show']);
         Route::delete('/{id}', [CallController::class, 'destroy']);
+        Route::get('/{idchild}/children', [CallController::class, 'getCallsxChildren']);
+        Route::get('/{idcontact}/contact', [CallController::class, 'getCallsXContact']);
     });
 
     Route::prefix('content')->group(function () {

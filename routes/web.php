@@ -18,10 +18,16 @@ use App\Http\Livewire\ContactsComponet;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::middleware(['auth'])->group( function () {
 
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('welcome');
+
+Route::get('/', function () {
+    return view('inicio');
+    // return view('front.index');
+});
 
 //children
 Route::get('/children', ChildrenComponent::class)->name('children.render');
@@ -32,3 +38,4 @@ Route::get('/contacts/{child}', ContactsComponet::class)->name('contacts.render'
 Route::get('/file/{child}', FileComponet::class)->name('file.render');
 
 Route::get('/call/{child}', CallComponet::class)->name('call.render');
+
