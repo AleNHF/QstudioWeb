@@ -14,9 +14,16 @@ use App\Http\Livewire\ChildrenComponent;
 |
 */
 
+Route::middleware(['auth'])->group( function () {
+
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('welcome');
+
 Route::get('/', function () {
     return view('inicio');
     // return view('front.index');
 });
 
 Route::get('/children', ChildrenComponent::class)->name('children.render');
+});
