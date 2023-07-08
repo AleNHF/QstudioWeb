@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Children;
+use App\Models\Content;
 
 class ChildrenComponent extends Component
 {  
@@ -15,13 +16,14 @@ class ChildrenComponent extends Component
     public $gender;
     public $profilePhoto;
     public $tutor_id;
-
+    public $mostrarContenido = false;
     public $state=true;
+    public $hijoId;
 
     public function render()
     {
         $child = Children::all();
-        return view('livewire.children', compact('child'))->extends('layouts.app');
+        return view('livewire.children', compact('child'));
 
     }
 
@@ -59,7 +61,7 @@ class ChildrenComponent extends Component
     public function edit($id)
     { $this->setState(false);
         $child = Children::find($id);
-
+        $this->clear();
         if ($child) {
             $this->children_id = $child->id;
             $this->name = $child->name;
@@ -115,5 +117,17 @@ class ChildrenComponent extends Component
         $this->gender = '';
         $this->profilePhoto = '';
         $this->tutor_id = '';
+    }
+
+ 
+
+    public function showContent($childId)
+    {
+       // return redirect()->route('content.render', ['child' => $childId]);
+        return redirect()->to(route('content.render', ['child' => $childId]));
+    }
+
+    public function sumar(){
+        $this->emit('logro10');
     }
 }
