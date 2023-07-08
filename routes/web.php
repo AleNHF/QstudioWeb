@@ -4,8 +4,16 @@ use App\Http\Livewire\Login;
 use App\Http\Livewire\Register;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ChildrenComponent;
+<<<<<<< HEAD
 
 
+=======
+use App\Http\Livewire\ContentComponet;
+use App\Http\Livewire\CallComponet;
+use App\Http\Livewire\LocationComponet;
+use App\Http\Livewire\FileComponet;
+use App\Http\Livewire\ContactsComponet;
+>>>>>>> 183ba63930679ae711666f0cb67d9ab6e1c91501
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +33,7 @@ Route::get('/', function () {
     return view('inicio');
 });
 
+<<<<<<< HEAD
 Route::get('/register', Register::class)->name('register.render');
 Route::get('/login', Login::class)->name('login');
 
@@ -36,3 +45,15 @@ Route::get('/login', Login::class)->name('login');
 Route::middleware(['auth'])->group(function () {
     Route::get('/children', ChildrenComponent::class)->name('children.render');
 });
+=======
+//children
+Route::get('/children', ChildrenComponent::class)->name('children.render');
+
+Route::get('/content/{child}', ContentComponet::class)->name('content.render');
+Route::get('/location/{child}', LocationComponet::class)->name('location.render');
+Route::get('/contacts/{child}', ContactsComponet::class)->name('contacts.render');
+Route::get('/file/{child}', FileComponet::class)->name('file.render');
+
+Route::get('/call/{child}', CallComponet::class)->name('call.render');
+
+>>>>>>> 183ba63930679ae711666f0cb67d9ab6e1c91501

@@ -1,15 +1,24 @@
+@extends('layouts.app');
 
+@section('content')
 <div>
    <br>
     <div class="row row-cols-1 row-cols-md-3 g-4 d-flex">
         @foreach ($child as $child)
         <div class="col d-flex">
+<<<<<<< HEAD
             {{-- <a href="{{ route('welcome') }}" class="card-link"> --}}
+=======
+           
+>>>>>>> 183ba63930679ae711666f0cb67d9ab6e1c91501
             <div class="card">
                 <div class="content">
-                    <div class="image">
-                        <img src="https://i.imgur.com/3ph2DLq.jpg" />
-                    </div>
+                    <a href="{{ route('content.render', ['child' => $child->id]) }}" class="card-link" >
+                        <div class="image">
+                            <img src="https://i.imgur.com/3ph2DLq.jpg" />
+                        </div>
+                    </a>
+                    
                     <div class="user-content text-center">
                         <h3>{{ $child->name }}</h3>
                     </div>
@@ -18,22 +27,19 @@
                     <button type="button" class="btn btn-light" wire:click="delete({{ $child->id }})">Eliminar</button>
                 </div>
             </div>
-            </a>
+    
         </div>
+
         @endforeach 
         <div class="col text-center" style="margin-top: 78px; ">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formaModal" wire:click="clear()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
-                class="bi bi-patch-plus-fill" viewBox="0 0 16 16">
-                <path
-                    d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0z" />
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+              </svg>
         </button>
         </div>
     </div>
- 
-
-
+    @endsection
 @include('components.modalheader')
 <div class="mb-3">
     <label for="name" class="form-label"> Nombre: </label>

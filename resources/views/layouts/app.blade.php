@@ -9,6 +9,7 @@
     <!-- Agrega los enlaces a los archivos CSS de Bootstrap -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/card.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/card-content.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
@@ -20,12 +21,12 @@
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="img\qs.jpeg" />
+                    <img src="{{ asset('img/qs.jpeg') }}" />
                 </span>
 
                 <div class="text logo-text">
                     <span class="image name">
-                        <img src="img\qstudioName.jpeg" />
+                        <img src="{{ asset('img/qstudioName.jpeg') }}" />
                     </span>
                 </div>
             </div>
@@ -76,20 +77,16 @@
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
+
               <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Inicio</a>
+                    <a class="nav-link" href="#">notificacion</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Acerca de</a>
+                    <a class="nav-link" href="#">perfil</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Servicios</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Contacto</a>
-                  </li>
+                  
                 </ul>
               </div>
             </div>
@@ -98,8 +95,9 @@
 
         <div class="container">
             @yield('content')
+
         </div>
-    </section>
+     </section>
 
 
     <!-- Scripts de JavaScript -->
