@@ -15,8 +15,8 @@ use App\Http\Livewire\ChildrenComponent;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-
+    return view('inicio');
+    // return view('front.index');
+});
 
 Route::get('/children', ChildrenComponent::class)->name('children.render');
