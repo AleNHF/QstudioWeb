@@ -7,7 +7,7 @@ use App\Models\Children;
 use App\Models\Content;
 
 class ChildrenComponent extends Component
-{  
+{
     public $children_id;
     public $name;
     public $lastname;
@@ -23,7 +23,8 @@ class ChildrenComponent extends Component
     public function render()
     {
         $child = Children::all();
-        return view('livewire.children', compact('child'));
+        return view('livewire.children', compact('child'))
+        ->extends('layouts.app');
 
     }
 
@@ -45,7 +46,7 @@ class ChildrenComponent extends Component
         $children -> tutor_id=$this->tutor_id;
 
         $children->save();
-       
+
     }
 
     public function clear(){
@@ -56,13 +57,17 @@ class ChildrenComponent extends Component
         $this->gender="";
         $this->profilePhoto="";
         $this->tutor_id=1;
+
+        $this->setState(true);
     }
 
     public function edit($id)
-    { $this->setState(false);
+    {
+
         $child = Children::find($id);
         $this->clear();
         if ($child) {
+            $this->setState(false);
             $this->children_id = $child->id;
             $this->name = $child->name;
             $this->lastname = $child->lastname;
@@ -80,6 +85,7 @@ class ChildrenComponent extends Component
         $child = Children::find($id);
 
     if ($child) {
+
         $child->name = $this->name;
         $child->lastname = $this->lastname;
         $child->alias = $this->alias;
@@ -89,6 +95,8 @@ class ChildrenComponent extends Component
         $child->tutor_id = $this->tutor_id;
 
         $child->save();
+
+        $this->setState(true);
     }
 
     }
@@ -119,7 +127,7 @@ class ChildrenComponent extends Component
         $this->tutor_id = '';
     }
 
- 
+
 
     public function showContent($childId)
     {
