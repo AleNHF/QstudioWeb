@@ -64,13 +64,13 @@ class Register extends Component
             'user_id' =>  $user->id
         ]);
 
-        $this->limpiarCampos();
 
-        Auth::attempt([
-            'email' => $user->email,
-            'password' => $user->password
-        ]);
-
+        Auth::login($user);
         return redirect()->to('/welcome');
+        // if(Auth::login($user)) {
+        // }
+
+
+        // $this->limpiarCampos();
     }
 }
