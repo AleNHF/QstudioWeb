@@ -1,77 +1,74 @@
-@extends('layouts.app');
 
-@section('content')
-    <div>
-        <br>
-        <div class="row row-cols-1 row-cols-md-3 g-4 d-flex">
-            @foreach ($child as $child)
-                <div class="col d-flex">
-                    <div class="card">
-                        <div class="content">
-                            <a href="{{ route('content.render', ['child' => $child->id]) }}" class="card-link">
-                                <div class="image">
-                                    <img src="https://i.imgur.com/3ph2DLq.jpg" />
-                                </div>
-                            </a>
 
-                            <div class="user-content text-center">
-                                <h3>{{ $child->name }}</h3>
-                            </div>
-                            <button type="button" class="btn btn-warning" wire:click="edit({{ $child->id }})"
-                                data-bs-toggle="modal" data-bs-target="#formaModal">Editar</button>
-                            <button type="button" class="btn btn-light"
-                                wire:click="delete({{ $child->id }})">Eliminar</button>
+    
+<div>
+   <br>
+    <div class="row row-cols-1 row-cols-md-3 g-4 d-flex">
+        @foreach ($child as $child)
+        <div class="col d-flex">
+
+            <div class="card">
+                <div class="content">
+                    <a href="{{ route('content.render', ['child' => $child->id]) }}" class="card-link" >
+                        <div class="image">
+                            <img src="https://i.imgur.com/3ph2DLq.jpg" />
                         </div>
+                    </a>
+
+                    <div class="user-content text-center">
+                        <h3>{{ $child->name }}</h3>
                     </div>
-
+                    <button type="button" class="btn btn-warning" wire:click="edit({{ $child->id }})" data-bs-toggle="modal"
+                        data-bs-target="#formaModal" >Editar</button>
+                    <button type="button" class="btn btn-light" wire:click="delete({{ $child->id }})">Eliminar</button>
                 </div>
-            @endforeach
-            <div class="col text-center" style="margin-top: 78px; ">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formaModal"
-                    wire:click="clear()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
-                        class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                        <path
-                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
-                    </svg>
-                </button>
             </div>
+
         </div>
 
-        @include('components.modalheader')
-        <div class="mb-3">
-            <label for="name" class="form-label"> Nombre: </label>
-            <input type="text" class="form-control" id="name" wire:model='name' placeholder="nombres..">
+        @endforeach
+        <div class="col text-center" style="margin-top: 78px; " >
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formaModal" wire:click="clear()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+              </svg>
+        </button>
         </div>
-        <div class="mb-3">
-            <label for="lastname" class="form-label">Apellido: </label>
-            <input type="text" class="form-control" id="lastname" wire:model='lastname' placeholder="Apellido..">
-        </div>
-        <div class="mb-3">
-            <label for="alias" class="form-label">Alias: </label>
-            <input type="text" class="form-control" id="alias" wire:model='alias' placeholder="Alias..">
-        </div>
-        <div class="mb-3">
-            <label for="birthDay" class="form-label">Fecha de nacimiento:</label>
-            <input type="date" class="form-control" wire:model='birthDay' id="birthDay">
-        </div>
-        <div class="mb-3">
-            <label for="gender" class="form-label">Género:</label>
-            <select id="gender" class="form-control" wire:model='gender'>
-                <option value="">Seleccionar</option>
-                <option value='M'>Masculino</option>
-                <option value='F'>Femenino</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="tutor_id" class="form-label">tutor: </label>
-            <input type="text" class="form-control" id="tutor_id" wire:model='tutor_id' placeholder="1..">
-        </div>
-        <div class="mb-3">
-            <label for="profilePhoto" class="form-label">tutor: </label>
-            <input type="text" class="form-control" id="profilePhoto" wire:model='profilePhoto' placeholder="fot">
-        </div>
-
-        @include('components.modalfooter')
     </div>
-@endsection
+
+@include('components.modalheader')
+<div class="mb-3">
+    <label for="name" class="form-label"> Nombre: </label>
+    <input type="text" class="form-control" id="name" wire:model='name' placeholder="nombres..">
+</div>
+<div class="mb-3">
+    <label for="lastname" class="form-label">Apellido: </label>
+    <input type="text" class="form-control" id="lastname" wire:model='lastname' placeholder="Apellido..">
+</div>
+<div class="mb-3">
+    <label for="alias" class="form-label">Alias: </label>
+    <input type="text" class="form-control" id="alias" wire:model='alias' placeholder="Alias..">
+</div>
+<div class="mb-3">
+    <label for="birthDay" class="form-label">Fecha de nacimiento:</label>
+    <input type="date" class="form-control" wire:model='birthDay' id="birthDay">
+</div>
+<div class="mb-3">
+    <label for="gender" class="form-label">Género:</label>
+    <select id="gender" class="form-control" wire:model='gender'>
+        <option value="">Seleccionar</option>
+        <option value='M'>Masculino</option>
+        <option value='F'>Femenino</option>
+    </select>
+</div>
+<div class="mb-3">
+    <label for="tutor_id" class="form-label">tutor: </label>
+    <input type="text" class="form-control" id="tutor_id" wire:model='tutor_id' placeholder="1..">
+</div>
+<div class="mb-3">
+    <label for="profilePhoto" class="form-label">tutor: </label>
+    <input type="text" class="form-control" id="profilePhoto" wire:model='profilePhoto' placeholder="fot">
+</div>
+
+@include('components.modalfooter')
+</div>
