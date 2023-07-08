@@ -27,19 +27,19 @@
         @livewireStyles
     </head>
     <body id="kt_body" class="bg-dark">
-        <x-user />
-
+        {{-- <x-user /> --}}
+        @livewire('register')
+        @livewireScripts
         <script>var hostUrl = "../demo1/dist/assets/";</script>
 		<!--begin::Global Javascript Bundle(used by all pages)-->
 		<script src="../demo1/dist/assets/plugins/global/plugins.bundle.js"></script>
 		<script src="../demo1/dist/assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="../../../public/demo1/dist/assets/js/custom/authentication/sign-up/general.js"></script>
+		{{-- <script src="../demo1/dist/assets/js/custom/authentication/sign-up/general.js"></script> --}}
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
 
         </div>
-        @livewireScripts
     </body>
 </html>

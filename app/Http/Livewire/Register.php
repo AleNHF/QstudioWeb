@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Tutor;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
@@ -21,9 +22,12 @@ class Register extends Component
 
     public $name, $email, $password, $apellido, $celular, $fecha_nacimiento;
 
+    // protected $layout = 'layouts.user';
+
     public function render()
     {
-        return view('livewire.register');
+        return view('livewire.register')
+                ->layout('layouts.user-register');
     }
 
     public function limpiarCampos() {
@@ -50,14 +54,6 @@ class Register extends Component
             'type' =>  'T'
         ]);
 
-        // 'name',
-        // 'lastname',
-        // 'birthDay',
-        // 'isActive',
-        // 'phoneNumber',
-        // 'profilePhoto',
-        // 'user_id'
-
         Tutor::create([
             'name' => $this->name,
             'lastname' => $this->apellido,
@@ -69,5 +65,12 @@ class Register extends Component
         ]);
 
         $this->limpiarCampos();
+
+        Auth::attempt([
+            'email' => $user->email,
+            'password' => $user->password
+        ]);
+
+        return redirect()->to('/welcome');
     }
 }

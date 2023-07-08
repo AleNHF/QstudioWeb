@@ -14,7 +14,7 @@
             <!--begin::Wrapper-->
             <div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
                 <!--begin::Form-->
-                <form >
+                <form id="kt_sign_up_form">
                     @csrf
 
 
@@ -134,7 +134,7 @@
                     <!--end::Input group-->
                     <!--begin::Actions-->
                     <div class="text-center">
-                        <button type="submit" id="kt_sign_up_submit" class="btn btn-lg btn-warning" style="background-color: #fe5000" wire:click.prevent="crear()">
+                        <button type="button" id="kt_sign_up_submit" class="btn btn-lg btn-warning" style="background-color: #fe5000" wire:click.prevent="crear()">
                             <span class="indicator-label">Guardar</span>
                             <span class="indicator-progress">Espere por favor ...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
