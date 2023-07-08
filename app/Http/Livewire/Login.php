@@ -34,7 +34,7 @@ class Login extends Component
 
     if(Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
         // Auth::login($user);
-        return redirect()->to('/welcome');
+        return redirect()->to('/children');
         // return redirect()->intended('/welcome');
         } else {
             // $this-> email = "error";

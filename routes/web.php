@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Livewire\Login;
+use App\Http\Livewire\Register;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ChildrenComponent;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,16 +17,22 @@ use App\Http\Livewire\ChildrenComponent;
 |
 */
 
-Route::middleware(['auth'])->group( function () {
-
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('welcome');
+/* Route::get('/', function () {
+    return view('welcome');
+})->name('welcome'); */
 
 Route::get('/', function () {
     return view('inicio');
-    // return view('front.index');
 });
 
-Route::get('/children', ChildrenComponent::class)->name('children.render');
+Route::get('/register', Register::class)->name('register.render');
+Route::get('/login', Login::class)->name('login');
+
+/* Route::middleware('guest')->group(function () {
+    Route::get('/register', Register::class)->name('register.render');
+    Route::get('/login', Login::class)->name('login');
+}); */
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/children', ChildrenComponent::class)->name('children.render');
 });

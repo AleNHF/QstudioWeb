@@ -4,7 +4,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4 d-flex">
         @foreach ($child as $child)
         <div class="col d-flex">
-            <a href="{{ route('welcome') }}" class="card-link">
+            {{-- <a href="{{ route('welcome') }}" class="card-link"> --}}
             <div class="card">
                 <div class="content">
                     <div class="image">

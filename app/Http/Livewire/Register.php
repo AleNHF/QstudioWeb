@@ -66,7 +66,7 @@ class Register extends Component
 
 
         Auth::login($user);
-        return redirect()->to('/welcome');
+        return redirect()->to('/children');
         // if(Auth::login($user)) {
         // }
 
