@@ -25,7 +25,6 @@ class ChildrenComponent extends Component
         $child = Children::all();
         return view('livewire.children', compact('child'))
         ->extends('layouts.app');
-
     }
 
     public function test(){
