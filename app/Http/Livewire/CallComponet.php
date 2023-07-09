@@ -8,10 +8,11 @@ use App\Models\Children;
 use App\Models\Call;
 
 class CallComponet extends Component
-{   public $child;
+{
+    public $child;
     public $contacts;
     public $call;
-    public $ids=0;
+    public $ids = 0;
     public $children;
 
     public function render()
@@ -26,12 +27,12 @@ class CallComponet extends Component
 
     }
 
-    public function store(){
-        $this->children=Children::where('id',$this->child)->first();
+    public function store()
+    {
+        $this->children = Children::where('id', $this->child)->first();
 
         $this->call = Call::join('contacts', 'calls.contact_id', '=', 'contacts.id')
-    ->where('contacts.children_id', $this->child)
-    ->get(['calls.*']);
-
+            ->where('contacts.children_id', $this->child)
+            ->get(['calls.*']);
     }
 }

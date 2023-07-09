@@ -24,8 +24,12 @@ class Call extends Model
         $calls = Contact::join('calls', 'calls.contact_id', '=', 'contacts.id')
             ->join('children', 'children.id', '=', 'contacts.children_id')
             ->where('contacts.children_id', '=', $childId)
+            ->orderBy('calls.date', 'asc')
             ->select('calls.*', 'contacts.*')
-            ->get();
+            ->get()
+            ->groupBy(function ($call) {
+                return $call->date->format('Y-m-d');
+            });
     
         return $calls;
     }

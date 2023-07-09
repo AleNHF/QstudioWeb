@@ -2,21 +2,59 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Location;
 use Livewire\Component;
 
 class LocationComponet extends Component
 {
-
-    public $child;
+    public $child, $locations, $existe;
+    public $lat = -25.344;
+    public $lng = 131.031;
 
     public function render()
     {
-        return view('livewire.location-componet');
+        $locations = $this->getCoordinates();
+
+        return view('livewire.location-componet', [
+            'locations' => $locations,
+        ]);
     }
 
     public function mount($child)
     {
         $this->child = $child;
-
     }
+
+    public function getCoordinates()
+    {
+        $this->locations = Location::where('children_id', $this->child)->get();
+        $this->existe = 'true';
+
+        if ($this->locations->isEmpty()) {
+            $this->existe = 'falso';
+        }
+
+        if ($this->locations) {
+            foreach ($this->locations as $location) {
+                // Extraer los valores de longitud y latitud
+                $pattern = '/longitud:\s*([\d.-]+),\s*latitud:\s*([\d.-]+)/';
+                preg_match($pattern, $location->coordinates, $matches);
+
+                if (isset($matches[1]) && isset($matches[2])) {
+                    $longitud = $matches[1];
+                    $latitud = $matches[2];
+
+                    // Agregar las variables de longitud y latitud al objeto $location
+                    $location->lat = $latitud;
+                    $location->lng = $longitud;
+                } else {
+                    echo "No se encontraron los valores de longitud y latitud.";
+                }
+            }
+        }
+
+        //dd($this->locations);
+        return $this->locations;
+    }
+
 }

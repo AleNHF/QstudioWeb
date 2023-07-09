@@ -50,7 +50,8 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
    
     Route::prefix('location')->group(function () {
         Route::post('/store', [LocationController::class, 'store']);
-        Route::get('/kid/{kidId}', [LocationController::class, 'getLocationXKid']);
+        //Route::get('/kid/{kidId}', [LocationController::class, 'getLocationXKid']);
+        Route::get('/kid/{kidId}', [LocationController::class, 'getLocationXKidDate']);
     });
 
     Route::prefix('file')->group(function () {

@@ -69,8 +69,6 @@ class ContentComponet extends Component
     public function render()
     {
         return view('livewire.content-componet');
-
-
     }
 
     public function mount($child)

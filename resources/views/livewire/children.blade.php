@@ -1,6 +1,6 @@
 
 
-    
+
 <div>
    <br>
     <div class="row row-cols-1 row-cols-md-3 g-4 d-flex">
@@ -11,7 +11,7 @@
                 <div class="content">
                     <a href="{{ route('content.render', ['child' => $child->id]) }}" class="card-link" >
                         <div class="image">
-                            <img src="https://i.imgur.com/3ph2DLq.jpg" />
+                            <img src="{{asset($child->profilePhoto) }}"/>
                         </div>
                     </a>
 
@@ -61,13 +61,10 @@
         <option value='F'>Femenino</option>
     </select>
 </div>
+
 <div class="mb-3">
-    <label for="tutor_id" class="form-label">tutor: </label>
-    <input type="text" class="form-control" id="tutor_id" wire:model='tutor_id' placeholder="1..">
-</div>
-<div class="mb-3">
-    <label for="profilePhoto" class="form-label">tutor: </label>
-    <input type="text" class="form-control" id="profilePhoto" wire:model='profilePhoto' placeholder="fot">
+    <label for="profilePhoto" class="form-label">Perfil niño: </label>
+    <input type="file" class="form-control" id="profilePhoto" wire:model='profilePhoto' placeholder="fot" >
 </div>
 
 @include('components.modalfooter')

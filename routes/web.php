@@ -24,10 +24,6 @@ use App\Http\Controllers\WebSocket\WebSocketController;
 |
 */
 
-/* Route::get('/', function () {
-    return view('welcome');
-})->name('welcome'); */
-
 Route::get('/websocket', function () {
     $webSocketController = new WebSocketController();
 
@@ -39,6 +35,7 @@ Route::get('/websocket', function () {
     );
     $server->run();
 });
+//$server->run();
 
 Route::get('/', function () {
     return view('inicio');
@@ -52,11 +49,6 @@ Route::get('/', function () {
 
 Route::get('/register', Register::class)->name('register.render');
 Route::get('/login', Login::class)->name('login');
-
-/* Route::middleware('guest')->group(function () {
-    Route::get('/register', Register::class)->name('register.render');
-    Route::get('/login', Login::class)->name('login');
-}); */
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/children', ChildrenComponent::class)->name('children.render');
