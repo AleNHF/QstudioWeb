@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Http\Livewire;
+use Livewire\WithFileUploads;
 
 use Livewire\Component;
 use App\Models\Children;
 use App\Models\Content;
+use App\Models\Tutor;
+
 
 class ChildrenComponent extends Component
-{
+{   
     public $children_id;
     public $name;
     public $lastname;
@@ -19,21 +22,24 @@ class ChildrenComponent extends Component
     public $mostrarContenido = false;
     public $state=true;
     public $hijoId;
+    public $tutor;
+    public $photo;
 
     public function render()
     {
-        $child = Children::all();
+        $usuario = auth()->user();
+        $this->tutor=Tutor::where('user_id',$usuario->id)->first();
+        $child = Children::where('tutor_id',$this->tutor->id)->get();
+
         return view('livewire.children', compact('child'))
         ->extends('layouts.app');
     }
 
-    public function test(){
-        dd('test');
-    }
-
+    
+    use WithFileUploads;
     public function store(){
+        //dd($this->name,$this->lastname,$this->alias,$this->birthDay,$this->gender,$this->profilePhoto,$this->tutor->id);
         $this->setState(true);
-
         $children = New Children();
 
         $children -> name= $this->name;
@@ -41,9 +47,11 @@ class ChildrenComponent extends Component
         $children -> alias=$this->alias;
         $children -> birthDay=$this->birthDay;
         $children -> gender=$this->gender;
-        $children -> profilePhoto=$this->profilePhoto;
-        $children -> tutor_id=$this->tutor_id;
+        $children->profilePhoto = ($this->gender == "M") ? 
+        'img/boy.png' : 'img/girl.png';
 
+        $children -> tutor_id=$this->tutor->id;
+        
         $children->save();
 
     }
@@ -55,7 +63,6 @@ class ChildrenComponent extends Component
         $this->birthDay="";
         $this->gender="";
         $this->profilePhoto="";
-        $this->tutor_id=1;
 
         $this->setState(true);
     }
@@ -74,7 +81,7 @@ class ChildrenComponent extends Component
             $this->birthDay = $child->birthDay;
             $this->gender = $child->gender;
             $this->profilePhoto = $child->profilePhoto;
-            $this->tutor_id = $child->tutor_id;
+            $this->tutor_id = $this->tutor->id;
         }
 
     }
@@ -91,8 +98,7 @@ class ChildrenComponent extends Component
         $child->birthDay = $this->birthDay;
         $child->gender = $this->gender;
         $child->profilePhoto = $this->profilePhoto;
-        $child->tutor_id = $this->tutor_id;
-
+        $child->tutor_id = $this->tutor->id;
         $child->save();
 
         $this->setState(true);
@@ -123,7 +129,7 @@ class ChildrenComponent extends Component
         $this->birthDay = '';
         $this->gender = '';
         $this->profilePhoto = '';
-        $this->tutor_id = '';
+
     }
 
 
