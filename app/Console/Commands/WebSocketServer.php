@@ -50,7 +50,7 @@ class WebSocketServer extends Command
                     new WebSocketController()
                 )
             ),
-            8090
+            8080
         );
 
         $this->info('Servidor WebSocket iniciado en el puerto 8090.');
