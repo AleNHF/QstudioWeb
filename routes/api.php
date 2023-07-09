@@ -35,6 +35,8 @@ Route::controller(ExpotokenController::class)->group(function () {
     Route::post('/register-notification', 'registerExpotoken');
     Route::post('/send-token', 'sendToken');
     ROute::post('/verify-token','verifyToken');
+    Route::post('disabled/token', 'disabledTokenInfante');
+
 });
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
@@ -45,8 +47,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     //Route::get('/delete-token', [App\Http\Controllers\API\ExpoTokenController::class, 'deleteExpotoken']);
 
     Route::post('children/store', [ChildrenController::class, 'store']);
-    Route::post('disbled/token', [ExpoTokenController::class, 'disabledTokenInfante']);
-
+   
     Route::prefix('location')->group(function () {
         Route::post('/store', [LocationController::class, 'store']);
         Route::get('/kid/{kidId}', [LocationController::class, 'getLocationXKid']);
