@@ -19,12 +19,15 @@ class Children extends Model
         'profilePhoto',
         'tutor_id'
     ];
-
+    public function tokens()
+    {
+        return $this->hasMany(Token::class);
+    }
     public function tutor()
     {
         return $this->belongsTo(Tutor::class, 'tutor_id');
     }
-    
+
     public function locations()
     {
         return $this->hasMany(Location::class, 'children_id');

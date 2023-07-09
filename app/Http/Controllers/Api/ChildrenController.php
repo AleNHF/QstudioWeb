@@ -7,6 +7,7 @@ use App\Models\Tutor;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController as BaseController;
+use App\Models\Token;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -16,7 +17,8 @@ class ChildrenController extends BaseController
     /**
      * This endpoint is for add children into the app tutor
      */
-    public function store(Request $request) 
+  
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
@@ -40,8 +42,8 @@ class ChildrenController extends BaseController
             $profile = $request->file('profilePhoto')->store($folder); //Storage::disk('local')->put($folder, $request->image, 'public');
             $url = Storage::url($profile);
         } else {
-            $url = $request->gender == 'F' ? 
-                'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043252-child-girl-kid-person_113255.png' : 
+            $url = $request->gender == 'F' ?
+                'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043252-child-girl-kid-person_113255.png' :
                 'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043235-afro-boy-child-kid_113264.png';
         }
 

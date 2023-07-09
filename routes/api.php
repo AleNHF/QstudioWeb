@@ -23,7 +23,8 @@ use App\Http\Controllers\Api\TutorController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/',function(){
+
+Route::get('/', function () {
     return "hola";
 });
 Route::post('register', [AuthController::class, 'register']);
@@ -33,6 +34,7 @@ Route::controller(ExpotokenController::class)->group(function () {
     Route::post('/register-token-kid', 'registerTokenLogin');
     Route::post('/register-notification', 'registerExpotoken');
     Route::post('/send-token', 'sendToken');
+    ROute::post('/verify-token','verifyToken');
 });
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
@@ -43,6 +45,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     //Route::get('/delete-token', [App\Http\Controllers\API\ExpoTokenController::class, 'deleteExpotoken']);
 
     Route::post('children/store', [ChildrenController::class, 'store']);
+    Route::post('disbled/token', [ExpoTokenController::class, 'disabledTokenInfante']);
 
     Route::prefix('location')->group(function () {
         Route::post('/store', [LocationController::class, 'store']);
@@ -62,7 +65,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
         Route::post('/', [ContactsController::class, 'store']);
         Route::post('/{id}', [ContactsController::class, 'update']);
         Route::get('/{id}', [ContactsController::class, 'show']);
-        Route::delete('/{id}', [ContactsController::class, 'destroy']);        
+        Route::delete('/{id}', [ContactsController::class, 'destroy']);
     });
 
     Route::prefix('call')->group(function () {
@@ -84,7 +87,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
         Route::get('/kid/{idKid}', [ContentController::class, 'contentXKid']);
         Route::get('/children/index', [ContentController::class, 'contentXChildren']);
     });
-  
+
     // TODO: Endpoints for control image with AWS
     Route::prefix('rekognition')->group(function () {
         Route::post('/controlCamera', [RekognitionController::class, 'imageControlCamera']);

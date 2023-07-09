@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Models\Token;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,6 +18,17 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $tokens = Token::where('status', 1)
+                ->where('active', true)
+                ->where('registerDate', '<', Carbon::now()->setTimezone('America/La_Paz')->subHour())
+                ->get();
+    
+            foreach ($tokens as $token) {
+                $token->active = false;
+                $token->save();
+            }
+        })->everyMinute();
     }
 
     /**
@@ -25,7 +38,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
