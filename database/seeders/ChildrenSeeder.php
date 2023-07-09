@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Children;
+use App\Models\Token;
 use Illuminate\Database\Seeder;
 
 class ChildrenSeeder extends Seeder
@@ -40,6 +41,14 @@ class ChildrenSeeder extends Seeder
             'birthDay' => '1990-01-01',
             'profilePhoto' => null,
             'tutor_id' => 1
+        ]);
+
+        $token = Token::create([
+            'code' => '111111',
+            'createDate' => '2023-07-08 19:13:00',
+            'status' => 0,
+            'children_id' => 1,
+
         ]);
     }
 }

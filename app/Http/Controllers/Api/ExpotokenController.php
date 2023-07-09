@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Children;
 use App\Models\Expotoken;
 use App\Models\Token;
 use Carbon\Carbon;
@@ -51,7 +52,7 @@ class ExpoTokenController extends BaseController
             $notifications = $user->notifications;
             return $this->sendResponse($notifications, "Notifications List.");
         }
-    }   
+    }
 
     /**
      * TODO: This is for show the unread notifications
@@ -72,7 +73,6 @@ class ExpoTokenController extends BaseController
      */
     public function readNotification()
     {
-
     }
 
     /**
@@ -82,7 +82,21 @@ class ExpoTokenController extends BaseController
     {
         //$user_id = User::find(Auth::user()->id);
         //$tutor_id = Tutor::where('user_id', $user_id)->first()->id;
-        $actualDate = Carbon::now()->setTimezone('America/La_Paz');
+       
+        $request->validate([
+            'children_id' => 'required|exists:children,id'
+        ]);
+       
+        $children = Children::find($request->children_id);
+       
+        $tokenantiguo = $children->tokens->where('active', true)->first();
+       
+        if (isset($tokenantiguo)) {
+            $tokenantiguo->active = false;
+            $tokenantiguo->save();
+        }
+
+        $actualDate = Carbon::now();
 
         $token = new Token();
         $token->code = $request->token_register;
@@ -97,21 +111,54 @@ class ExpoTokenController extends BaseController
     /**
      * TODO: This is for register the token into the children app
      */
+    public function disabledTokenInfante(Request $request)
+    {
+        $request->validate([
+            "token" => "required|exists:tokens,code",
+        ]);
+        $token = Token::where('code', $request->token)->where('active', true)->first();
+        if (isset($token)) {
+            $token->active = false;
+            $token->save();
+            return $this->sendResponse($token, "token deshabilitado");
+        } else {
+            return $this->sendError('Token en desuso', [], 404);
+        }
+    }
+
+    public function verifyToken(Request $request)
+    {
+        $request->validate([
+            "token" => "required|exists:tokens,code",
+        ]);
+        $token = Token::where('code', $request->token)->where('active', true)->first();
+        if (isset($token)) {
+            $result = [
+                'data' => $token,
+                'child_id' => $token->children_id
+            ];
+            return $this->sendResponse($result, "token sigue activo");
+        } else {
+            return $this->sendError('Token ya no está activo!', [], 409); // TOKEN YA FUE REGISTRADO
+        }
+    }
+
     public function registerTokenLogin(Request $request)
     {
         try {
-            $actualDate = Carbon::now()->setTimezone('America/La_Paz');
+            $actualDate = Carbon::now();
             $token = Token::where('code', $request->token)->where('status', 0)->first();
 
             if ($token == '') {
                 if ($token = Token::where('code', $request->token)->where('status', 1)->exists()) {
-                    return $this->sendError('Token registered!');
+                    return $this->sendError('Token registered!', [], 409); // TOKEN YA FUE REGISTRADO
                 }
-                //return $this->sendError('Token not found');
+                return $this->sendError('Invalid token!', [], 400); // TOKEN INVALIDO, NO SE ENCONTRÓ UN TOKEN QUE COINCIDA
             }
 
             $token->status = 1;
             $token->registerDate = $actualDate;
+            $token->active = true;
             $token->save();
 
             $result = [
@@ -121,7 +168,7 @@ class ExpoTokenController extends BaseController
 
             return $this->sendResponse($result, "Token registered successfully.");
         } catch (\Throwable $th) {
-            return $this->sendError('Token not found', 404);
+            return $this->sendError('Token not found', [], 404); // Not Found status code
         }
     }
 }
