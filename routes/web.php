@@ -35,7 +35,7 @@ Route::get('/websocket', function () {
     );
     $server->run();
 });
-$server->run();
+//$server->run();
 
 Route::get('/', function () {
     return view('inicio');
