@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Models\Children;
 use App\Models\Location;
 
-class WebSocketController extends Controller implements MessageComponentInterface
+class WebSocketController implements MessageComponentInterface
 {
     protected $clients;
 
@@ -22,10 +22,19 @@ class WebSocketController extends Controller implements MessageComponentInterfac
     {
         $this->clients->attach($conn);
         echo "Nuevo cliente conectado: {$conn->resourceId}\n";
+
+        // Enviar un mensaje al cliente cuando se conecta
+        $conn->send("¡Bienvenido! Te has conectado exitosamente al servidor WebSocket.");
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
     {
+        echo "Mensaje recibido: " . $msg . "\n";
+
+        // Opcional: Mostrar contenido completo del mensaje
+        var_dump($msg);
+
+        // Resto de la lógica del método onMessage
         foreach ($this->clients as $client) {
             if ($client !== $from) {
                 $client->send($msg);

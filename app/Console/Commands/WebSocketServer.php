@@ -42,7 +42,8 @@ class WebSocketServer extends Command
      */
     public function handle()
     {
-        //return 0;
+        $this->info('Iniciando servidor WebSocket...');
+
         $server = IoServer::factory(
             new HttpServer(
                 new WsServer(
@@ -51,6 +52,9 @@ class WebSocketServer extends Command
             ),
             8090
         );
+
+        $this->info('Servidor WebSocket iniciado en el puerto 8090.');
+
         $server->run();
     }
 }

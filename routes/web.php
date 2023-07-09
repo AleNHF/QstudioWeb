@@ -35,7 +35,7 @@ Route::get('/websocket', function () {
         new HttpServer(
             new WsServer($webSocketController)
         ),
-        8080 // Puerto en el que se ejecutará el servidor WebSocket
+        8090 // Puerto en el que se ejecutará el servidor WebSocket
     );
     $server->run();
 });
