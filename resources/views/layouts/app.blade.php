@@ -44,8 +44,8 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-bar-chart-alt-2 icon' ></i>
+                        <a href="{{ route('token.render') }}">
+                            <i class="bx bx-key icon"></i>
                             <span class="text nav-text">Tokens</span>
                         </a>
                     </li>
@@ -76,7 +76,7 @@
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-
+              
               <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item">
@@ -85,12 +85,12 @@
                   <li class="nav-item">
                     <a class="nav-link" href="#">perfil</a>
                   </li>
-                  
+
                 </ul>
               </div>
             </div>
           </nav>
-          
+
 
         <div class="container">
             @yield('content')
@@ -103,6 +103,7 @@
     @livewireScripts
     @yield('js')
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/message.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>

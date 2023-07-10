@@ -9,6 +9,7 @@ use App\Http\Livewire\CallComponet;
 use App\Http\Livewire\LocationComponet;
 use App\Http\Livewire\FileComponet;
 use App\Http\Livewire\ContactsComponet;
+use App\Http\Livewire\TokenComponet;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
 use Ratchet\Server\IoServer;
@@ -57,4 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/contacts/{child}', ContactsComponet::class)->name('contacts.render');
     Route::get('/file/{child}', FileComponet::class)->name('file.render');
     Route::get('/call/{child}', CallComponet::class)->name('call.render');
+
+    Route::get('/token', TokenComponet::class)->name('token.render');
+
 });

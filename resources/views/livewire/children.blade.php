@@ -37,10 +37,18 @@
     </div>
 
 @include('components.modalheader')
+@if ($showAlert)
+    <div class="alert alert-danger" role="alert">
+        Por favor, completa todos los campos.
+    </div>
+@endif
+
 <div class="mb-3">
     <label for="name" class="form-label"> Nombre: </label>
-    <input type="text" class="form-control" id="name" wire:model='name' placeholder="nombres..">
+    <input type="text" class="form-control" id="name" wire:model='name' placeholder="nombres.."  required="">
+
 </div>
+
 <div class="mb-3">
     <label for="lastname" class="form-label">Apellido: </label>
     <input type="text" class="form-control" id="lastname" wire:model='lastname' placeholder="Apellido..">
@@ -61,11 +69,5 @@
         <option value='F'>Femenino</option>
     </select>
 </div>
-
-<div class="mb-3">
-    <label for="profilePhoto" class="form-label">Perfil niño: </label>
-    <input type="file" class="form-control" id="profilePhoto" wire:model='profilePhoto' placeholder="fot" >
-</div>
-
 @include('components.modalfooter')
 </div>
