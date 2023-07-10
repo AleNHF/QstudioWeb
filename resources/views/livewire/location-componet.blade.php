@@ -19,7 +19,7 @@
                             <div class=" text-center mb-10">
                                 <h3>Historial de Ubicaciones</h3>
                             </div>
-                            <div class="card-body py-3 w-100">
+                            <div class="card-body py-3 w-100" style="height: 400px; overflow: auto;">
                                 <table class="table table-hover ">
                                     <thead style="font-family: Poppins;">
                                         <tr class="fw-bolder text-muted bg-light">
