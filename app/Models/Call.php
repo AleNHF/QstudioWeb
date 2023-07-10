@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,7 +29,8 @@ class Call extends Model
             ->select('calls.*', 'contacts.*')
             ->get()
             ->groupBy(function ($call) {
-                return $call->date->format('Y-m-d');
+                $date = Carbon::parse($call->date);
+                return $date->format('Y-m-d');
             });
     
         return $calls;
