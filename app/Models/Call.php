@@ -35,5 +35,21 @@ class Call extends Model
     
         return $calls;
     }
+
+    public function getCallsxChildFilter($childId,$startDate,$endDate) {
+        $calls = Contact::join('calls', 'calls.contact_id', '=', 'contacts.id')
+            ->join('children', 'children.id', '=', 'contacts.children_id')
+            ->where('contacts.children_id', '=', $childId)
+            ->whereBetween('calls.date', [$startDate, $endDate])
+            ->orderBy('calls.date', 'asc')
+            ->select('calls.*', 'contacts.*')
+            ->get()
+            ->groupBy(function ($call) {
+                $date = Carbon::parse($call->date);
+                return $date->format('Y-m-d');
+            });
+    
+        return $calls;
+    }
     
 }

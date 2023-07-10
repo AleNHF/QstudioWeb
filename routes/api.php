@@ -103,5 +103,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     // TODO: Endpoints for filteers
     Route::prefix('filter')->group(function () {
         Route::get('/location/{idkid}', [FiltreController::class, 'getLocationsFilter']);
+        Route::get('/calls/{idkid}', [FiltreController::class, 'getCallsFilter']);
+        Route::get('/contents/{idkid}', [FiltreController::class, 'getContentsFilter']);
     });
 });
