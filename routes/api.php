@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\RekognitionController;
 use App\Http\Controllers\Api\TutorController;
+use App\Http\Controllers\Api\FiltreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,5 +98,10 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
         Route::post('/controlFacebook', [RekognitionController::class, 'imageControlFacebook']);
         Route::post('/controlTelegram', [RekognitionController::class, 'imageControlTelegram']);
         Route::post('/controlDocument', [RekognitionController::class, 'documentControl']);
+    });
+
+    // TODO: Endpoints for filteers
+    Route::prefix('filter')->group(function () {
+        Route::get('/location/{idkid}', [FiltreController::class, 'getLocationsFilter']);
     });
 });

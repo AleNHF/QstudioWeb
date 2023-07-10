@@ -1,5 +1,8 @@
 <?php
 
+use App\Events\ContentNotificationEvent;
+use App\Events\PruebaPushEvent;
+use App\Events\PushNotificationEvent;
 use App\Http\Livewire\Login;
 use App\Http\Livewire\Register;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +35,7 @@ Route::get('/websocket', function () {
         new HttpServer(
             new WsServer($webSocketController)
         ),
-        8080 // Puerto en el que se ejecutará el servidor WebSocket
+        8090 // Puerto en el que se ejecutará el servidor WebSocket
     );
     $server->run();
 });
@@ -42,11 +45,10 @@ Route::get('/', function () {
     return view('inicio');
 });
 
-//*************************************************
-
-//**************************************************/
-
-
+Route::get('/prueba', function () {
+    event(new PruebaPushEvent());
+    return 'Prueba';
+});
 
 Route::get('/register', Register::class)->name('register.render');
 Route::get('/login', Login::class)->name('login');
