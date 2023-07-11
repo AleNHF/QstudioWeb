@@ -39,6 +39,8 @@ class RekognitionController extends BaseController
 
             $resultLabels = $result->get('ModerationLabels');
 
+            return $resultLabels;
+
             if ($resultLabels !== []) {
                 try {
                     $name = $request->file('photo')->getClientOriginalName();
