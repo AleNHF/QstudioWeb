@@ -56,10 +56,11 @@ Route::prefix('file')->group(function () {
 
 Route::prefix('contact')->group(function () {
     Route::get('/kid/{idkid}', [ContactsController::class, 'getContactsXKid']);
-    Route::post('/', [ContactsController::class, 'store']);
+    //Route::post('/', [ContactsController::class, 'store']);
     Route::post('/{id}', [ContactsController::class, 'update']);
     Route::get('/{id}', [ContactsController::class, 'show']);
     Route::delete('/{id}', [ContactsController::class, 'destroy']);
+    Route::post('store/contacts-json', [ContactsController::class, 'storeContacts']);
 });
 
 Route::prefix('call')->group(function () {
@@ -69,6 +70,7 @@ Route::prefix('call')->group(function () {
     Route::delete('/{id}', [CallController::class, 'destroy']);
     Route::get('/{idchild}/children', [CallController::class, 'getCallsxChildren']);
     Route::get('/{idcontact}/contact', [CallController::class, 'getCallsXContact']);
+    Route::post('/store/calls', [CallController::class, 'storeCalls']);
 });
 
 Route::prefix('content')->group(function () {

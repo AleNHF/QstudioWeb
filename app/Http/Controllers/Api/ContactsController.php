@@ -112,7 +112,6 @@ class ContactsController extends BaseController
     public function storeContacts(Request $request)
     {
         $json = $request->json()->all();
-
         $contacts = $json['contacts'];
         $childrenId = $json['children_id'];
 
