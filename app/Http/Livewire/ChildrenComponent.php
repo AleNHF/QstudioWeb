@@ -10,7 +10,7 @@ use App\Models\Tutor;
 
 
 class ChildrenComponent extends Component
-{   
+{
     public $children_id;
     public $name;
     public $lastname;
@@ -19,11 +19,12 @@ class ChildrenComponent extends Component
     public $gender;
     public $profilePhoto;
     public $tutor_id;
-    public $mostrarContenido = false;
+    public $showAlert = false;
     public $state=true;
     public $hijoId;
     public $tutor;
     public $photo;
+    public $titulo;
 
     public function render()
     {
@@ -31,14 +32,25 @@ class ChildrenComponent extends Component
         $this->tutor=Tutor::where('user_id',$usuario->id)->first();
         $child = Children::where('tutor_id',$this->tutor->id)->get();
 
+
         return view('livewire.children', compact('child'))
         ->extends('layouts.app');
     }
 
-    
-    use WithFileUploads;
+
     public function store(){
+
         //dd($this->name,$this->lastname,$this->alias,$this->birthDay,$this->gender,$this->profilePhoto,$this->tutor->id);
+        if (empty($this->name) ||
+            empty($this->lastname) ||
+            empty($this->alias) ||
+            empty($this->birthDay) ||
+            empty($this->gender)
+            ) {
+            $this->showAlert = true;
+            return;
+        }
+
         $this->setState(true);
         $children = New Children();
 
@@ -47,16 +59,18 @@ class ChildrenComponent extends Component
         $children -> alias=$this->alias;
         $children -> birthDay=$this->birthDay;
         $children -> gender=$this->gender;
-        $children->profilePhoto = ($this->gender == "M") ? 
+        $children->profilePhoto = ($this->gender == "M") ?
         'img/boy.png' : 'img/girl.png';
 
         $children -> tutor_id=$this->tutor->id;
-        
+
         $children->save();
+        $this->clear();
 
     }
 
     public function clear(){
+        $this->showAlert = false;
         $this->name="";
         $this->lastname="";
         $this->alias="";
@@ -65,12 +79,13 @@ class ChildrenComponent extends Component
         $this->profilePhoto="";
 
         $this->setState(true);
+
     }
 
     public function edit($id)
     {
-
         $child = Children::find($id);
+
         $this->clear();
         if ($child) {
             $this->setState(false);
@@ -87,7 +102,15 @@ class ChildrenComponent extends Component
     }
 
     public function update($id)
-    {
+    {  if (empty($this->name) ||
+        empty($this->lastname) ||
+        empty($this->alias) ||
+        empty($this->birthDay) ||
+        empty($this->gender)
+        ) {
+        $this->showAlert = true;
+        return;
+    }
         $child = Children::find($id);
 
     if ($child) {
@@ -117,7 +140,11 @@ class ChildrenComponent extends Component
     }
 
     private function setState($state)
-    {
+    {   if($state == true){
+        $this->titulo='Crear';
+    }else{
+        $this->titulo='Editar';
+    }
         $this->state = $state;
     }
 
@@ -143,4 +170,5 @@ class ChildrenComponent extends Component
     public function sumar(){
         $this->emit('logro10');
     }
+
 }
