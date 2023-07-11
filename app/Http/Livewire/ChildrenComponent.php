@@ -10,7 +10,7 @@ use App\Models\Tutor;
 
 
 class ChildrenComponent extends Component
-{   
+{
     public $children_id;
     public $name;
     public $lastname;
@@ -27,10 +27,11 @@ class ChildrenComponent extends Component
     public $titulo;
 
     public function render()
-    { 
+    {
         $usuario = auth()->user();
         $this->tutor=Tutor::where('user_id',$usuario->id)->first();
         $child = Children::where('tutor_id',$this->tutor->id)->get();
+
 
         return view('livewire.children', compact('child'))
         ->extends('layouts.app');
@@ -40,9 +41,9 @@ class ChildrenComponent extends Component
     public function store(){
 
         //dd($this->name,$this->lastname,$this->alias,$this->birthDay,$this->gender,$this->profilePhoto,$this->tutor->id);
-        if (empty($this->name) || 
+        if (empty($this->name) ||
             empty($this->lastname) ||
-            empty($this->alias) || 
+            empty($this->alias) ||
             empty($this->birthDay) ||
             empty($this->gender)
             ) {
@@ -58,11 +59,11 @@ class ChildrenComponent extends Component
         $children -> alias=$this->alias;
         $children -> birthDay=$this->birthDay;
         $children -> gender=$this->gender;
-        $children->profilePhoto = ($this->gender == "M") ? 
+        $children->profilePhoto = ($this->gender == "M") ?
         'img/boy.png' : 'img/girl.png';
 
         $children -> tutor_id=$this->tutor->id;
-        
+
         $children->save();
         $this->clear();
 
@@ -78,13 +79,13 @@ class ChildrenComponent extends Component
         $this->profilePhoto="";
 
         $this->setState(true);
-        
+
     }
 
     public function edit($id)
     {
         $child = Children::find($id);
-        
+
         $this->clear();
         if ($child) {
             $this->setState(false);
@@ -97,13 +98,13 @@ class ChildrenComponent extends Component
             $this->profilePhoto = $child->profilePhoto;
             $this->tutor_id = $this->tutor->id;
         }
-       
+
     }
 
     public function update($id)
-    {  if (empty($this->name) || 
+    {  if (empty($this->name) ||
         empty($this->lastname) ||
-        empty($this->alias) || 
+        empty($this->alias) ||
         empty($this->birthDay) ||
         empty($this->gender)
         ) {
@@ -111,7 +112,7 @@ class ChildrenComponent extends Component
         return;
     }
         $child = Children::find($id);
-        
+
     if ($child) {
 
         $child->name = $this->name;
@@ -169,4 +170,5 @@ class ChildrenComponent extends Component
     public function sumar(){
         $this->emit('logro10');
     }
+
 }

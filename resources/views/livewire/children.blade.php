@@ -27,6 +27,7 @@
         </div>
 
         @endforeach
+        
         <div class="col text-center" style="margin-top: 78px; " >
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formaModal" wire:click="clear()">
             <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
