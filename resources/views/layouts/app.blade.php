@@ -42,8 +42,8 @@
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="#">
-                        <i class='bx bx-bar-chart-alt-2 icon'></i>
+                    <a href="{{ route('token.render') }}">
+                        <i class="bx bx-key icon"></i>
                         <span class="text nav-text">Tokens</span>
                     </a>
                 </li>
