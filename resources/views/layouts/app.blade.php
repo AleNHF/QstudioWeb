@@ -35,29 +35,25 @@
 
         <div class="menu-bar">
             <div class="menu">
-
-                    <li class="nav-link">
-                        <a href="{{ route('children.render') }}">
-                            <i class='bx bx-home-alt icon' ></i>
-                            <span class="text nav-text">Mi Familia</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="{{ route('token.render') }}">
-                            <i class="bx bx-key icon"></i>
-                            <span class="text nav-text">Tokens</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-bell icon'></i>
-                            <span class="text nav-text">Notifications</span>
-                        </a>
-                    </li>
+                <li class="nav-link">
+                    <a href="{{ route('children.render') }}">
+                        <i class='bx bx-home-alt icon'></i>
+                        <span class="text nav-text">Mi Familia</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="#">
+                        <i class='bx bx-bar-chart-alt-2 icon'></i>
+                        <span class="text nav-text">Tokens</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="#">
+                        <i class='bx bx-bell icon'></i>
+                        <span class="text nav-text">Notifications</span>
+                    </a>
+                </li>
             </div>
-
             <div class="bottom-content">
                 <li class="">
                     <a href="#">
@@ -67,7 +63,6 @@
                 </li>
             </div>
         </div>
-
     </nav>
 
     <section class="home">
@@ -91,10 +86,8 @@
             </div>
           </nav>
 
-
         <div class="container">
             @yield('content')
-
         </div>
      </section>
 
