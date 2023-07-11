@@ -28,9 +28,6 @@ class EventServiceProvider extends ServiceProvider
         ContentNotificationEvent::class => [
             ContentNotificationListener::class,
         ],
-        'App\Events\PruebaPushEvent' => [
-            'App\Listeners\PruebaPushListener',
-        ],
     ];
 
     /**
