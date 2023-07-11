@@ -48,7 +48,6 @@ class ChildrenSeeder extends Seeder
             'createDate' => '2023-07-08 19:13:00',
             'status' => 0,
             'children_id' => 1,
-
         ]);
     }
 }
