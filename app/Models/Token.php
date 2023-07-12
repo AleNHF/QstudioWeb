@@ -13,6 +13,7 @@ class Token extends Model
         'createDate',
         'status',
         'registerDate',
+        'active',
         'children_id',
     ];
 

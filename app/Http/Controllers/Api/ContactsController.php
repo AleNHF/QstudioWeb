@@ -15,7 +15,7 @@ class ContactsController extends BaseController
     /**
      * This endpoint is for contacts list into the app tutor
      */
-    public function getContactsXKid($id) 
+    public function getContactsXKid($id)
     {
         $kid = Children::findOrFail($id);
         $tutor = Tutor::findOrFail($kid->tutor_id);
@@ -26,7 +26,7 @@ class ContactsController extends BaseController
             return $this->sendResponse($contacts, "Contacts list of your kid.");
         } else {
             return $this->sendError("No Content.", 204);
-        }       
+        }
     }
 
     /**
@@ -59,7 +59,7 @@ class ContactsController extends BaseController
     public function update(Request $request, $id)
     {
         $contact = Contact::findOrFail($id);
-        
+
         if (isset($contact)) {
             $contact->name = $request->name;
             $contact->phoneNumber = $request->phoneNumber;
@@ -105,5 +105,24 @@ class ContactsController extends BaseController
         }
 
         return $this->sendError("Unauthorized", 401);
+    }
+
+
+    /* TODO: Endpoint que recibe un json con array de contactos a almacenar en la BD */
+    public function storeContacts(Request $request)
+    {
+        $json = $request->json()->all();
+        $contacts = $json['contacts'];
+        $childrenId = $json['children_id'];
+
+        foreach ($contacts as $contactData) {
+            $contact = new Contact();
+            $contact->name = $contactData['name'];
+            $contact->phoneNumber = $contactData['number'];
+            $contact->children_id = $childrenId;
+            $contact->save();
+        }
+
+        return $this->sendResponse($json, 'Datos almacenados correctamente');
     }
 }

@@ -1,5 +1,8 @@
 <?php
 
+use App\Events\ContentNotificationEvent;
+use App\Events\PruebaPushEvent;
+use App\Events\PushNotificationEvent;
 use App\Http\Livewire\Login;
 use App\Http\Livewire\Register;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +12,7 @@ use App\Http\Livewire\CallComponet;
 use App\Http\Livewire\LocationComponet;
 use App\Http\Livewire\FileComponet;
 use App\Http\Livewire\ContactsComponet;
+use App\Http\Livewire\TokenComponet;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
 use Ratchet\Server\IoServer;
@@ -41,11 +45,10 @@ Route::get('/', function () {
     return view('inicio');
 });
 
-//*************************************************
-
-//**************************************************/
-
-
+Route::get('/prueba', function () {
+    event(new PruebaPushEvent());
+    return 'Prueba';
+});
 
 Route::get('/register', Register::class)->name('register.render');
 Route::get('/login', Login::class)->name('login');
@@ -57,4 +60,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/contacts/{child}', ContactsComponet::class)->name('contacts.render');
     Route::get('/file/{child}', FileComponet::class)->name('file.render');
     Route::get('/call/{child}', CallComponet::class)->name('call.render');
+
+    Route::get('/token', TokenComponet::class)->name('token.render');
+
 });

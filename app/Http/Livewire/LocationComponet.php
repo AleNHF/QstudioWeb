@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class LocationComponet extends Component
 {
-    public $child, $locations, $existe;
+    public $child, $locations, $existe,$fechaInicio, $fechaFin,$horaInicio,$horaFin;
     public $lat = -25.344;
     public $lng = 131.031;
 
@@ -17,7 +17,7 @@ class LocationComponet extends Component
 
         return view('livewire.location-componet', [
             'locations' => $locations,
-        ]);
+        ])->extends('layouts.app');
     }
 
     public function mount($child)
@@ -28,6 +28,25 @@ class LocationComponet extends Component
     public function getCoordinates()
     {
         $this->locations = Location::where('children_id', $this->child)->get();
+        $query = Location::where('children_id', $this->child);
+        if ($this->fechaInicio) {
+            $query->where('date', '>=', $this->fechaInicio);
+        }
+    
+        if ($this->fechaFin) {
+            $query->where('date', '<=', $this->fechaFin);
+        }
+    
+        if ($this->horaInicio) {
+            $query->whereTime('time', '>=', $this->horaInicio);
+        }
+    
+        if ($this->horaFin) {
+            $query->whereTime('time', '<=', $this->horaFin);
+        }
+    
+        $this->locations = $query->get();
+
         $this->existe = 'true';
 
         if ($this->locations->isEmpty()) {

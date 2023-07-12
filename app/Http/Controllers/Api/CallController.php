@@ -15,7 +15,7 @@ class CallController extends BaseController
     /**
      * This endpoint is for Call list into the app tutor
      */
-    public function getCallsXContact($id) 
+    public function getCallsXContact($id)
     {
         $contact = Contact::findOrFail($id);
 
@@ -25,13 +25,13 @@ class CallController extends BaseController
             return $this->sendResponse($calls, "Call list of this contact.");
         } else {
             return $this->sendError("No Content.", 204);
-        }       
+        }
     }
 
     /**
      * This endpoint is for Call list into the app tutor
      */
-    public function getCallsxChildren($childrenId) 
+    public function getCallsxChildren($childrenId)
     {
         $callModel = new Call();
         $calls = $callModel->getCallsxChild($childrenId);
@@ -39,7 +39,7 @@ class CallController extends BaseController
         if (isset($calls)) {
             return $this->sendResponse($calls, 'Listado de llamadas por niño');
         }
-       
+
         return $this->sendError('Algo salió mal');
     }
 
@@ -74,7 +74,7 @@ class CallController extends BaseController
     public function update(Request $request, $id)
     {
         $call = Call::findOrFail($id);
-        
+
         if (isset($call)) {
             $call->update($request->all());
 
@@ -116,5 +116,48 @@ class CallController extends BaseController
         }
 
         return $this->sendError("Unauthorized", 401);
+    }
+
+
+    function storeCalls(Request $request)
+    {
+        $json = $request->json()->all();
+
+        $calls = $json['calls'];
+        $childrenId = $json['children_id'];
+
+        foreach ($calls as $callData) {
+            $phoneNumber = $callData['phoneNumber'];
+            
+            // Busca el contacto por número de teléfono
+            $contact = Contact::where('phoneNumber', $phoneNumber)->first();
+
+            // Si no existe el contacto, lo crea y lo guarda en la tabla "contacts"
+            if (!$contact) {
+                $contact = new Contact();
+                $contact->name = $callData['name'];
+                $contact->phoneNumber = $phoneNumber;
+                $contact->children_id = $childrenId;
+                $contact->save();
+            }
+
+            $duration = sprintf(
+                '%02d:%02d:%02d',
+                $callData['duration']['hours'],
+                $callData['duration']['minutes'],
+                $callData['duration']['seconds']
+            );
+
+            // Almacena los detalles de la llamada en la base de datos
+            $call = new Call();
+            $call->type = $callData['type'];
+            $call->received = $callData['rawType'] != 3 ||  $callData['rawType'] != 5 ? true : false;
+            $call->date = $callData['dateTime'];
+            $call->duration = $duration;
+            $call->contact_id = $contact->id;
+            $call->save();
+        }
+
+        return $this->sendResponse($json, 'Llamadas almacenadas correctamente');
     }
 }

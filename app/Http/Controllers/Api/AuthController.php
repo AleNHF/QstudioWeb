@@ -68,7 +68,7 @@ class AuthController extends BaseController
         if ($user == null ) {
             return $this->sendError('Unauthorized.', 401);
         }
-
+        
         $result = [
             'user' => $user,
             'tutor' => $tutor

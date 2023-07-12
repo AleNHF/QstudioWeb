@@ -16,18 +16,17 @@
                 <div class="row align-items-center" {{--  data-bs-target="#formaNav" --}}>
                     <div class="col">
                         <div class=" text-center mb-10">
-                            <h3 class="text-warning ">Lista de Contenido de {{$children->name}} </h3>
+                            <h3 class="text-warning ">Lista de Galeria de {{$children->name}} </h3>
                         </div>
-    
-                        <div class="card-body py-3 ">
+
+                        <div class="card-body py-3" style="height: 400px; overflow: auto;">
                             <table class="table table-hover ">
                                 <thead style="font-family: Poppins;">
                                     <tr class="fw-bolder text-muted bg-light">
                                         <th class="ps-4 min-w-8px rounded-start">#</th>
-                                        <th class="min-w-125px">Estado</th>
                                         <th class="min-w-125px">Fecha</th>
-                                        <th class="min-w-125px">Duracion</th>
-                                       
+                                        <th class="min-w-125px">Url</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -38,14 +37,14 @@
                                     <tr>
                                         <th class="ps-4">{{$ids}}</th>
                                         <td>{{ $file->createDate }}</td>
-            
+
                                         <td>{{ $file->path  }}</td>
                                     </tr>
-            
+
                                     @endforeach
                                 </tbody>
                             </table>
-            
+
                         </div>
                     </div>
                 </div>

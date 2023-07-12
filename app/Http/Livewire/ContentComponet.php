@@ -13,6 +13,8 @@ class ContentComponet extends Component
     public $contentChild;
     public $ids=0;
     public $children;
+    public $fechaInicio;
+    public $fechaFin;
 
     public $nameData=array(
         'Nudity'=>'Desnudez',
@@ -67,19 +69,42 @@ class ContentComponet extends Component
     protected $listeners = ['logro10'];
 
     public function render()
-    {
-        return view('livewire.content-componet');
+    {  
+        return view('livewire.content-componet')->extends('layouts.app');
     }
 
     public function mount($child)
     {
         $this->child = $child;
-        $this->store();
+        $this->children=Children::where('id',$this->child)->first();
+        $this->contentChild=Content::where('children_id',$this->child)->get();
+       // $this->store();
     }
 
     public function store(){
-        $this->children=Children::where('id',$this->child)->first();
+       /*  $this->children=Children::where('id',$this->child)->first();
         $this->contentChild=Content::where('children_id',$this->child)->get();
+         */
+        $this->children=Children::where('id',$this->child)->first();
+        $query = Content::query();
+
+        // Verifica si se ha seleccionado una fecha de inicio
+        if (!empty($this->fechaInicio)) {
+            $fechaInicio = date('Y-m-d 00:00:00', strtotime($this->fechaInicio));
+            $query->where('date', '>=', $fechaInicio);
+
+        }
+    
+        // Verifica si se ha seleccionado una fecha de fin
+        if (!empty($this->fechaFin)) {
+            $fechaFin = date('Y-m-d 23:59:59', strtotime($this->fechaFin));
+            $query->where('date', '<=', $fechaFin);
+        }
+    
+        // Filtra por el ID del niño
+        $query->where('children_id', $this->child);
+    
+        $this->contentChild = $query->get();
 
     }
 

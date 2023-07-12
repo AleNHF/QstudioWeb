@@ -1,6 +1,4 @@
-@extends('layouts.app')
 
-@section('content')
     <div>
         <div class="container-fluid d-flex justify-content-center aling-items-center">
             <div class="card content" style="width: 100%;">
@@ -16,10 +14,39 @@
                             <div wire:ignore id="map" style="width:500px;height:500px;"></div>
                         </div>
                         <div class="col-6">
+                            
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input class="form-control text-left mr-2" type="date" wire:model="fechaInicio"
+                                            wire:change="getCoordinates()">
+                                        <label class="ml-3 form-control-placeholder" id="start-p" for="start">fecha
+                                            inicio</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control text-left mr-2" type="date" wire:model="fechaFin"
+                                            wire:change="getCoordinates()">
+                                        <label class="ml-3 form-control-placeholder" id="end-p" for="end">fecha fin</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control text-left mr-2" type="time" wire:model="horaInicio"
+                                            wire:change="getCoordinates()">
+                                        <label class="ml-3 form-control-placeholder" id="start-p" for="start">hora
+                                            inicio</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control text-left mr-2" type="time" wire:model="horaFin"
+                                            wire:change="getCoordinates()">
+                                        <label class="ml-3 form-control-placeholder" id="end-p" for="end">hora fin</label>
+                                    </div>
+                                </div>
+    
+                            </div>
+                            <br>
                             <div class=" text-center mb-10">
                                 <h3>Historial de Ubicaciones</h3>
                             </div>
-                            <div class="card-body py-3 w-100">
+                            <div class="card-body py-3 w-100" style="height: 400px; overflow: auto;">
                                 <table class="table table-hover ">
                                     <thead style="font-family: Poppins;">
                                         <tr class="fw-bolder text-muted bg-light">
@@ -77,7 +104,7 @@
             d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() =>
                 d[l](f, ...n))
         })({
-            key: "AIzaSyCdLUChbfEF9gll6vb8IYDB2Mh8vWbzo8Q",
+            key: '{{ env('GOOGLE_MAPS_API_KEY') }}',
             v: "weekly",
             // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
             // Add other bootstrap parameters as needed, using camel case.
@@ -130,4 +157,4 @@
             initMap();
         });
     </script>
-@endsection
+

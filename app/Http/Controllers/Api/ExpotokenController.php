@@ -76,37 +76,40 @@ class ExpoTokenController extends BaseController
     }
 
     /**
-     * TODO: This is for send the register token
+     * TODO: Este token es para crear un token en la aplicación del tutor
      */
     public function sendToken(Request $request)
     {
-        //$user_id = User::find(Auth::user()->id);
-        //$tutor_id = Tutor::where('user_id', $user_id)->first()->id;
-       
         $request->validate([
             'children_id' => 'required|exists:children,id'
         ]);
-       
+
         $children = Children::find($request->children_id);
-       
+
         $tokenantiguo = $children->tokens->where('active', true)->first();
-       
+
         if (isset($tokenantiguo)) {
             $tokenantiguo->active = false;
             $tokenantiguo->save();
         }
 
         $actualDate = Carbon::now();
+        $existingCodes = Token::pluck('code')->toArray();
+
+        do {
+            $code = mt_rand(100000, 999999);
+        } while (in_array($code, $existingCodes));
 
         $token = new Token();
-        $token->code = $request->token_register;
+        $token->code = $code; // Corregir variable
         $token->createDate = $actualDate;
         $token->status = 0;
         $token->children_id = $request->children_id;
         $token->save();
 
-        return $this->sendResponse($token, "Token sent");
+        return $this->sendResponse($token, "Token creado");
     }
+
 
     /**
      * TODO: This is for register the token into the children app
@@ -114,13 +117,23 @@ class ExpoTokenController extends BaseController
     public function disabledTokenInfante(Request $request)
     {
         $request->validate([
-            "token" => "required|exists:tokens,code",
+            'children_id' => 'required|exists:children,id'
         ]);
-        $token = Token::where('code', $request->token)->where('active', true)->first();
-        if (isset($token)) {
-            $token->active = false;
-            $token->save();
-            return $this->sendResponse($token, "token deshabilitado");
+
+        $children = Children::find($request->children_id);
+
+        $tokens = Token::where([
+            'active' => true,
+            'children_id' => $children->id
+        ])->get();
+
+        if (isset($tokens)) {
+            foreach ($tokens as $token) {
+                $token->active = false;
+                $token->save();
+            }
+
+            return $this->sendResponse($tokens, "token deshabilitado");
         } else {
             return $this->sendError('Token en desuso', [], 404);
         }
