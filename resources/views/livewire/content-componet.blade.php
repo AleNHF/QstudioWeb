@@ -49,10 +49,10 @@
                                         <th class="ps-4 min-w-8px rounded-start">#</th>
                                         <th class="min-w-125px">Fecha</th>
                                         <th class="min-w-125px">Path</th>
-                                        <th class="min-w-125px">URL</th>
                                         <th class="min-w-125px">Tipo</th>
-                                        <th class="min-w-125px">Imagen</th>
-
+                                        <th class="min-w-125px">Image</th>
+                                        
+                                    
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -65,20 +65,21 @@
                                         <td>{{ $contentChild->date }}</td>
 
                                         <td>{{ $contentChild->path }}</td>
-                                        <td>{{ $contentChild->url }}</td>
+                                        
                                         <td>{{$nameData[$contentChild->contentData]}}/{{$parentNameData[$contentChild->type]}}
                                         </td>
+                                         <td>
+                                          <div class="image-container">
+                                             <a href="{{ Storage::disk('s3')->url($contentChild->url) }}" data-lightbox="imagen" data-title="{{ $contentChild->type }}">
+                                             <img class="blocked-image" src="{{ Storage::disk('s3')->url($contentChild->url) }}" alt="{{ $contentChild->type }}" width="60" height="70">
+                                                <span class="image-overlay">Ver</span>
+                                                </a>
+                                             </div>
 
-                                        <td>
-                                            {{-- <a href="{{Storage::disk('s3')->url($contentChild->url)}}"
-                                                data-lightbox="imagen" data-title="{{$contentChild->type}}">
-                                                <img src="{{Storage::disk('s3')->url($contentChild->url)}}" alt=""
-                                                    width="60" height="70">
-                                            </a> --}}
-                                        </td>
+                                         </td>
                                     </tr>
-
                                     @endforeach
+                                     
                                 </tbody>
                             </table>
 
@@ -88,5 +89,21 @@
             </div>
         </div>
 
-
     </div>
+{{-- 
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const images = document.querySelectorAll('.blocked-image');
+        images.forEach(function (image) {
+            image.addEventListener('click', function () {
+                // Lógica para abrir el modal aquí
+                // Por ejemplo, utilizando el ID de la imagen
+                const imageId = image.dataset.imageId;
+                const modal = document.getElementById('modalPhoto');
+                // Lógica para mostrar la imagen en el modal
+            });
+        });
+    });
+</script>
+@endpush --}}

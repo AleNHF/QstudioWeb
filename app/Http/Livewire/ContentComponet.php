@@ -15,6 +15,8 @@ class ContentComponet extends Component
     public $children;
     public $fechaInicio;
     public $fechaFin;
+    public $selectedContent;
+    public $showModal = false;
 
     public $nameData=array(
         'Nudity'=>'Desnudez',
@@ -107,6 +109,22 @@ class ContentComponet extends Component
         $this->contentChild = $query->get();
 
     }
+
+
+   
+
+public function openModal($contentId)
+{  
+    $content = Content::where('id',$contentId)->first();
+  
+    if ($content) {
+        $this->selectedContent = $content;
+    } else {
+        $this->selectedContent = null;
+    }
+    $this->showModal = true;
+ 
+}
 
     public function logro10()
     {

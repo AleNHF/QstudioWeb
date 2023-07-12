@@ -21,9 +21,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('location.render', ['child' => $child]) }}">Ubicacion</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('file.render', ['child' => $child]) }}">Galeria</a>
-          </li>
+         
         </ul>
       </div>
     </div>
