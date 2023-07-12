@@ -150,7 +150,7 @@ class CallController extends BaseController
 
             // Almacena los detalles de la llamada en la base de datos
             $call = new Call();
-            $call->type = $callData['type'];
+            $call->type = $callData['rawType'];
             $call->received = $callData['rawType'] != 3 ||  $callData['rawType'] != 5 ? true : false;
             $call->date = $callData['dateTime'];
             $call->duration = $duration;

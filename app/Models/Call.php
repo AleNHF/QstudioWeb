@@ -11,6 +11,7 @@ class Call extends Model
     use HasFactory;
     protected $fillable = [
         'received',
+        'type',
         'date',
         'duration',
         'contact_id',
