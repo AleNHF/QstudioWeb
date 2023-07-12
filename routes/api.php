@@ -31,6 +31,9 @@ Route::get('/', function () {
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
+Route::get('contactos/{id}',[ContactsController::class,'getContacts']);
+Route::get('llamadas/{id}',[CallController::class,'getCalls']);
+
 Route::controller(ExpotokenController::class)->group(function () {
     Route::post('/register-token-kid', 'registerTokenLogin');
     Route::post('/register-notification', 'registerExpotoken');
@@ -55,7 +58,7 @@ Route::prefix('file')->group(function () {
 });
 
 Route::prefix('contact')->group(function () {
-    Route::get('/kid/{idkid}', [ContactsController::class, 'getContactsXKid']);
+    Route::get('/kid/{id}', [ContactsController::class, 'getContactsXKid']);
     //Route::post('/', [ContactsController::class, 'store']);
     Route::post('/{id}', [ContactsController::class, 'update']);
     Route::get('/{id}', [ContactsController::class, 'show']);
@@ -68,7 +71,7 @@ Route::prefix('call')->group(function () {
     Route::post('/{id}', [CallController::class, 'update']);
     Route::get('/{id}', [CallController::class, 'show']);
     Route::delete('/{id}', [CallController::class, 'destroy']);
-    Route::get('/{idchild}/children', [CallController::class, 'getCallsxChildren']);
+    Route::get('/{id}/children', [CallController::class, 'getCallsxChildren']);
     Route::get('/{idcontact}/contact', [CallController::class, 'getCallsXContact']);
     Route::post('/store/calls', [CallController::class, 'storeCalls']);
 });

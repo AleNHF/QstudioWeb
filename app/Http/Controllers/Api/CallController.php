@@ -27,7 +27,17 @@ class CallController extends BaseController
             return $this->sendError("No Content.", 204);
         }
     }
+    public function getCalls($id)
+    {
+        $callModel = new Call();
+        $calls = $callModel->getCallsxChild($id);
 
+        if (isset($calls)) {
+            return $this->sendResponse($calls, 'Listado de llamadas por niño');
+        }
+
+        return $this->sendError('Algo salió mal');
+    }
     /**
      * This endpoint is for Call list into the app tutor
      */
@@ -128,7 +138,7 @@ class CallController extends BaseController
 
         foreach ($calls as $callData) {
             $phoneNumber = $callData['phoneNumber'];
-            
+
             // Busca el contacto por número de teléfono
             $contact = Contact::where('phoneNumber', $phoneNumber)->first();
 

@@ -15,6 +15,16 @@ class ContactsController extends BaseController
     /**
      * This endpoint is for contacts list into the app tutor
      */
+    public function getContacts($id)
+    {
+        try {
+            $kid = Children::findorFail($id);
+            $contacts = $kid->contacts;
+            return $this->sendResponse($contacts, "Contacts list of your kid.");
+        } catch (\Throwable $th) {
+            return $this->sendError("No Content." + $th, 404);
+        }
+    }
     public function getContactsXKid($id)
     {
         $kid = Children::findOrFail($id);
