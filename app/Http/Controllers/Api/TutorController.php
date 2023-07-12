@@ -41,9 +41,19 @@ class TutorController extends BaseController
                 $url = 'https://cdn-icons-png.flaticon.com/512/6596/6596121.png';
             }
 
+            if (isset($input['password'])) {
+                $inputPassword = $input['password'];
+                $storedPassword = $user->password;
+
+                if (!password_verify($inputPassword, $storedPassword)) {
+                    return $this->sendResponse($user, 'The password is the same to old password.');
+                } 
+
+                $user->password = bcrypt($input['password']);
+            }
+
             $user->name = $input['name'];
-            $user->email = $input['email'];
-            $user->password = bcrypt($input['password']);
+            $user->email = $input['email'];           
             $user->save();
 
             $tutor->name = $input['name'];
