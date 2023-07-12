@@ -97,4 +97,59 @@ body{
     background-color: #2fff78;
 }
 
+/* imagen contenido*/ 
+/* .blocked-image {
+    filter: blur(3px); 
+    opacity: 0.7; 
+    transition: filter 0.3s, opacity 0.3s; 
+}
 
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 60%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; 
+    transition: opacity 0.3s; 
+}
+
+.image-container:hover .blocked-image {
+    filter: none; 
+    opacity: 1; 
+}
+
+.image-container:hover .overlay {
+    opacity: 1; 
+} 
+ */
+ .blocked-image {
+    filter: blur(2px); 
+    opacity: 0.7; 
+    transition: filter 0.3s, opacity 0.3s; 
+}
+ .image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.image-container:hover .image-overlay {
+    opacity: 1;
+}
