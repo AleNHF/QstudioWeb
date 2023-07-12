@@ -11,6 +11,7 @@ class Call extends Model
     use HasFactory;
     protected $fillable = [
         'received',
+        'type',
         'date',
         'duration',
         'contact_id',
@@ -25,6 +26,22 @@ class Call extends Model
         $calls = Contact::join('calls', 'calls.contact_id', '=', 'contacts.id')
             ->join('children', 'children.id', '=', 'contacts.children_id')
             ->where('contacts.children_id', '=', $childId)
+            ->orderBy('calls.date', 'asc')
+            ->select('calls.*', 'contacts.*')
+            ->get()
+            ->groupBy(function ($call) {
+                $date = Carbon::parse($call->date);
+                return $date->format('Y-m-d');
+            });
+    
+        return $calls;
+    }
+
+    public function getCallsxChildFilter($childId,$startDate,$endDate) {
+        $calls = Contact::join('calls', 'calls.contact_id', '=', 'contacts.id')
+            ->join('children', 'children.id', '=', 'contacts.children_id')
+            ->where('contacts.children_id', '=', $childId)
+            ->whereBetween('calls.date', [$startDate, $endDate])
             ->orderBy('calls.date', 'asc')
             ->select('calls.*', 'contacts.*')
             ->get()

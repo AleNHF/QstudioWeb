@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Call;
 use App\Models\Children;
+use App\Models\Content;
 use App\Models\File;
 use App\Models\Location;
 use App\Models\Tutor;
@@ -61,4 +63,65 @@ class FiltreController extends BaseController
         return $this->sendError("No Content.", 204);
     }
 
+    /**
+     * This endpoint is for calls list into the app tutor with filters
+     */
+    public function getCallsFilter(Request $request, $kidId)
+    {
+        $startDate = $request->query('startDate');
+        $endDate = $request->query('endDate');
+
+        // Validación de fechas
+        $validator = Validator::make($request->all(), [
+            'startDate' => 'required|date_format:d-m-Y',
+            'endDate' => 'required|date_format:d-m-Y',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Invalid date format.', 400);
+        }
+
+        $startDate = Carbon::createFromFormat('d-m-Y', $startDate)->format('Y-m-d');
+        $endDate = Carbon::createFromFormat('d-m-Y', $endDate)->format('Y-m-d');
+
+        $callModel = new Call();
+        $calls = $callModel->getCallsxChildFilter($kidId,$startDate,$endDate);
+
+        if (isset($calls)) {
+            return $this->sendResponse($calls, 'Listado de llamadas por niño');
+        }
+       
+        return $this->sendError('Algo salió mal');
+    }
+
+    /**
+     * This endpoint is for calls list into the app tutor with filters
+     */
+    public function getContentsFilter(Request $request, $kidId)
+    {
+        $startDate = $request->query('startDate');
+        $endDate = $request->query('endDate');
+
+        // Validación de fechas
+        $validator = Validator::make($request->all(), [
+            'startDate' => 'required|date_format:d-m-Y',
+            'endDate' => 'required|date_format:d-m-Y',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Invalid date format.', 400);
+        }
+
+        $startDate = Carbon::createFromFormat('d-m-Y', $startDate)->format('Y-m-d');
+        $endDate = Carbon::createFromFormat('d-m-Y', $endDate)->format('Y-m-d');
+
+        $contentModel = new Content();
+        $contents = $contentModel->getContentFilter($kidId,$startDate,$endDate);
+
+        if (isset($contents)) {
+            return $this->sendResponse($contents, 'Listado de contenidos por niño');
+        }
+       
+        return $this->sendError('Algo salió mal');
+    }
 }
