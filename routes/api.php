@@ -31,6 +31,9 @@ Route::get('/', function () {
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
+Route::get('contactos/{id}',[ContactsController::class,'getContacts']);
+Route::get('llamadas/{id}',[CallController::class,'getCalls']);
+
 Route::controller(ExpotokenController::class)->group(function () {
     Route::post('/register-token-kid', 'registerTokenLogin');
     Route::post('/register-notification', 'registerExpotoken');
