@@ -88,6 +88,6 @@ class UserController extends Controller
         $planTutor->fecha_inicio = $fecha;
         $planTutor->fecha_fin = date("Y-m-d",strtotime($fecha.$time));
         $planTutor->save();
-        return redirect()->to('/plan');
+        return redirect()->to('/');
       }
 }
