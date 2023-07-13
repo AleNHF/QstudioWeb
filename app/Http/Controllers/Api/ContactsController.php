@@ -30,13 +30,13 @@ class ContactsController extends BaseController
         $kid = Children::findOrFail($id);
         $tutor = Tutor::findOrFail($kid->tutor_id);
 
-        if (Auth::user()->id == $tutor->user_id) {
+        // if (Auth::user()->id == $tutor->user_id) {
             $contacts = $kid->contacts;
 
             return $this->sendResponse($contacts, "Contacts list of your kid.");
-        } else {
-            return $this->sendError("No Content.", 204);
-        }
+        // } else {
+        //     return $this->sendError("No Content.", 204);
+        // }
     }
 
     /**
