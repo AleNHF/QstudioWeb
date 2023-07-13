@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlansTable extends Migration
+class CreatePlanTutorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreatePlansTable extends Migration
      */
     public function up()
     {
-        Schema::create('plans', function (Blueprint $table) {
+        Schema::create('plan_tutors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->unsignedInteger('countDevices');
-            $table->string('timePlan');
-            $table->decimal('price');
-            $table->boolean('status');
+            $table->foreignId('plan_id');
+            $table->foreignId('tutor_id');
+            $table->boolean('activo');
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreatePlansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plans');
+        Schema::dropIfExists('plan_tutor');
     }
 }

@@ -61,6 +61,13 @@ Route::get('markAsRead', function () {
 Route::get('notifications', NotificationComponent::class)->name('notification.render');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/plan', [App\Http\Controllers\UserController::class, 'plan'])->name('plan');
+    Route::get('/success', [App\Http\Controllers\UserController::class, 'success'])->name('success');
+    Route::post('/plan', [App\Http\Controllers\UserController::class, 'checkout'])->name('checkout');
+});
+
+
+Route::middleware(['auth'])->group(function () {
     Route::get('/children', ChildrenComponent::class)->name('children.render');
     Route::get('/content/{child}', ContentComponet::class)->name('content.render');
     Route::get('/location/{child}', LocationComponet::class)->name('location.render');
