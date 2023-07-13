@@ -44,6 +44,12 @@
                     </a>
                 </li>
                 <li class="nav-link">
+                    <a href="{{ route('notification.render') }}">
+                        <i class='bx bx-bell icon'></i>
+                        <span class="text nav-text">Notifications</span>
+                    </a>
+                </li>
+                <li class="nav-link">
                     <a href="{{ route('token.render') }}">
                         <i class="bx bx-key icon"></i>
                         <span class="text nav-text">Tokens</span>
