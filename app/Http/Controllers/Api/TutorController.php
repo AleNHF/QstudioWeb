@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Api\BaseController as BaseController;
+use App\Models\Token;
 use Carbon\Carbon;
 
 class TutorController extends BaseController
@@ -83,6 +84,17 @@ class TutorController extends BaseController
         $tutor = Tutor::where(['user_id' => $user->id])->first();
 
         $children = $tutor->children;
+        foreach ($children as $key => $value) {
+            $status = Token::where('children_id', $value->id)
+                    ->where('status', 1)
+                    ->exists();
+            if($status){
+                $value->token_status= 1;
+            }else{
+                $value->token_status= 0;
+            }
+        }
+        // return $children;
         $countChildren = $children->count();
 
         $result = [
