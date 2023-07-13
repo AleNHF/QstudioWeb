@@ -54,7 +54,7 @@ class TokenComponet extends Component
 
         $token = New Token();
         $token -> code = $code;
-        $token -> createDate = now()->format('d-m-Y');
+        $token -> createDate = now()->format('Y-m-d');
         $token -> status = 0;
         $token -> registerDate=now()->format('Y-m-d');
         $token -> children_id = $this->children_id;
