@@ -13,6 +13,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
 </head>
 
 <body>
@@ -47,21 +49,9 @@
                         <span class="text nav-text">Tokens</span>
                     </a>
                 </li>
-                <li class="nav-link">
-                    <a href="#">
-                        <i class='bx bx-bell icon'></i>
-                        <span class="text nav-text">Notifications</span>
-                    </a>
-                </li>
+                
             </div>
-            <div class="bottom-content">
-                <li class="">
-                    <a href="#">
-                        <i class='bx bx-log-out icon'></i>
-                        <span class="text nav-text">Logout</span>
-                    </a>
-                </li>
-            </div>
+           
         </div>
     </nav>
 
@@ -75,7 +65,7 @@
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item" style="margin-right: 15px;">
+                        <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white"
                                     class="bi bi-bell-fill" viewBox="0 0 16 16">
@@ -83,6 +73,15 @@
                                         d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
                                 </svg>
                             </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Editar perfil</a></li>
+                                <li><a class="dropdown-item" href="/">Salir</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item" style="display: flex; align-items: center;">
                             <img src="{{ asset('img/padre.png') }}" alt="user" class="rounded-circle"
@@ -93,6 +92,7 @@
                                 </small>
                             </a>
                         </li>
+                       
                     </ul>
                 </div>
             </div>

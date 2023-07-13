@@ -30,12 +30,12 @@
                                                 <label class="ml-3 form-control-placeholder" id="end-p" for="end">fecha fin</label>
                                             </div>
                                         </div>
-            
+
                                     </div>
-        
+
                                 </div>
                                 <br>
-            
+
 
                         <div class="card-body py-3 " style="height: 400px; overflow: auto;">
                             <table class="table table-hover ">
@@ -57,22 +57,37 @@
                                     @endphp
                                     <tr>
                                         <th class="ps-4">{{$ids}}</th>
-                                
-                                            <td>
-                                                @if ($call->received)
-                                                    <label class="text-success">recibido</i> 
-                                                @else
-                                                    <<label class=" text-danger">rechasado</i> 
-                                                @endif
-                                            </td>
-                                       
+                                        <td>
+                                            @if ($call->type)
+                                            @switch($call->type)
+                                                @case(1)
+                                                    <i class="bi bi-telephone-outbound text-success"></i>
+                                                    <label class="text-success">Saliente</label>
+                                                    @break
+                                                @case(2)
+                                                    <i class="bi bi-telephone-inbound text-primary"></i>
+                                                    <label class="text-primary">Entrante</label>
+                                                    @break
+                                                @case(3)
+                                                    <i class="bi bi-telephone-x text-danger"></i>
+                                                    <label class="text-danger">Perdida</label>
+                                                    @break
+                                                @case(4)
+                                                    <i class="bi bi-telephone-minus text-danger"></i>
+                                                    <label class="text-danger">Rechazada</label>
+                                                    @break
+                                                @default
+                                            @endswitch
+                                        @endif
+                                        </td>
+                                                                            
+
                                         <td>{{ $call->date  }}</td>
                                         <td>{{ $call->duration }}</td>
-                                         <td>{{ $call->duration }}</td>
-                                          <td>{{ $call->duration }}</td>
+                                         <td>{{ $call->name }}</td>
+                                          <td>{{ $call->phoneNumber }}</td>
 
                                     </tr>
-
                                     @endforeach
                                 </tbody>
                             </table>

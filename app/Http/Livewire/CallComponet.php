@@ -29,7 +29,7 @@ class CallComponet extends Component
 
         $this->call = Call::join('contacts', 'calls.contact_id', '=', 'contacts.id')
             ->where('contacts.children_id', $this->child)
-            ->get(['calls.*']);
+            ->get(['*']);
 
     }
 
@@ -48,6 +48,6 @@ class CallComponet extends Component
             $this->call->whereDate('calls.date', '<=', $this->fechaFin);
         }
         
-        $this->call = $this->call->get(['calls.*']);
+        $this->call = $this->call->get(['*']);
     }
 }

@@ -51,7 +51,7 @@ Route::get('/prueba', function () {
 });
 
 Route::get('/register', Register::class)->name('register.render');
-Route::get('/login', Login::class)->name('login');
+Route::get('/login', Login::class)->name('login')->name('login.render');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/children', ChildrenComponent::class)->name('children.render');
