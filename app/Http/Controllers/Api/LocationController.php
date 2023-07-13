@@ -84,7 +84,7 @@ class LocationController extends BaseController
         $kid = Children::findOrFail($kidId);
         $tutor = Tutor::find($kid->tutor_id);
 
-        if (Auth::user()->id == $tutor->user_id) {
+        if ($tutor != null) {
             // $locations = Location::where('children_id', $kid->id)
             //     ->orderBy('date', 'asc')
             //     ->get()
@@ -114,8 +114,8 @@ class LocationController extends BaseController
                     'id' => $location->id,
                     'time' => $location->time,
                     'date' => $location->date,
-                    'longitude' => substr($aux[0], 1),
-                    'latitude' => substr($aux[1], 0, -1)
+                    'longitude' => substr($aux[0], 9),
+                    'latitude' => substr($aux[1], 8, -1)
                 ];
             });
             return $this->sendResponse($modifiedLocations, "List of locations grouped by date");
