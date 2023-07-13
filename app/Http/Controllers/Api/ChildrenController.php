@@ -17,7 +17,33 @@ class ChildrenController extends BaseController
     /**
      * This endpoint is for add children into the app tutor
      */
-  
+    public function storageContacto(Request $request)
+    {
+
+
+        $constact = $request->contactos;
+        $number = $request->number;
+
+
+        foreach ($constact as  $constactos) {
+
+            $guardar = new Conctact();
+            $guardar->name = $constactos;
+            foreach ($number as  $numbers) {
+
+                $guardar->phoneNumber = $numbers;
+            }
+
+            $guardar->children_id = $request->id_hijo;
+            $guardar->save();
+        }
+
+
+        return response()->json([
+            'message' => "Contacto subida",
+            'data' =>  "constact",
+        ]);
+    }
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [

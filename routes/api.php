@@ -65,7 +65,7 @@ Route::prefix('contact')->group(function () {
     Route::delete('/{id}', [ContactsController::class, 'destroy']);
     Route::post('store/contacts-json', [ContactsController::class, 'storeContacts']);
 });
-
+Route::post('/storageContacto', [ChildrenController::class, 'storageContacto']);
 Route::prefix('call')->group(function () {
     Route::post('/store', [CallController::class, 'store']);
     Route::post('/{id}', [CallController::class, 'update']);
