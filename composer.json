@@ -16,7 +16,8 @@
         "league/flysystem-aws-s3-v3": "1.0.29",
         "livewire/livewire": "^2.12",
         "nesbot/carbon": "^2.68",
-        "pusher/pusher-php-server": "^7.2"
+        "pusher/pusher-php-server": "^7.2",
+        "spatie/laravel-backup": "^3.11"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

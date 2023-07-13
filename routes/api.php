@@ -59,7 +59,7 @@ Route::prefix('file')->group(function () {
 
 Route::prefix('contact')->group(function () {
     Route::get('/kid/{id}', [ContactsController::class, 'getContactsXKid']);
-    //Route::post('/', [ContactsController::class, 'store']);
+    Route::post('/', [ContactsController::class, 'store']);
     Route::post('/{id}', [ContactsController::class, 'update']);
     Route::get('/{id}', [ContactsController::class, 'show']);
     Route::delete('/{id}', [ContactsController::class, 'destroy']);
