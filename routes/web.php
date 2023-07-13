@@ -52,7 +52,7 @@ Route::get('/prueba', function () {
 });
 
 Route::get('/register', Register::class)->name('register.render');
-Route::get('/login', Login::class)->name('login');
+Route::get('/login', Login::class)->name('login')->name('login.render');
 
 Route::get('markAsRead', function () {
     auth()->user()->unreadNotifications->markAsRead();

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" type="imagenes" href="{{asset('img/logowhite.png')}}">
-    <title>PROTECTING YOU</title>
+    <title>QSTUDIO</title>
 
     <!--LINNK-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
@@ -17,7 +17,7 @@
     <link type="text/css" href="{{asset('css/style.css') }}" rel="stylesheet">
     <link type="text/css" href="{{asset('css/slick.css') }}" rel="stylesheet">
 </head>
-<body> 
+<body> {{-- 
     @yield('redes')
         <section id="headerSection">
             @yield('navbar_top')
@@ -37,7 +37,31 @@
     </div>
     @yield('products')
     @yield('footer')
-    @yield('modals')
+    @yield('modals') --}}
+    <section id="headerSection">
+        @include('front.red')
+        <div class="header-top">
+            <div class="container d-flex justify-content-between">
+                <div class="d-inline-flex ml-auto">
+                    
+                </div>
+            </div>
+        </div>
+        <br>
+        @include('front.navbar')    
+        @include('front.baner')
+    </section>
+   
+    @include('front.cardService')
+    @include('front.product')
+    @include('front.cards')
+    @include('front.title')
+    @include('front.fin')
+    @include('front.footer')
+    
+    <div class="container">
+        @yield('content')
+    </div>
     <!--SCRIPT-->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

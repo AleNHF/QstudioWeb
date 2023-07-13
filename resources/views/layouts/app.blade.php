@@ -49,16 +49,10 @@
                         <span class="text nav-text">Tokens</span>
                     </a>
                 </li>
-                <li class="nav-link">
-                    <a href="{{ route('notification.render') }}">
-                        <i class='bx bx-bell icon'></i>
-                        <span class="text nav-text">Notifications</span>
-                    </a>
-                </li>
             </div>
             <div class="bottom-content">
                 <li class="">
-                    <a href="#">
+                    <a href="/">
                         <i class='bx bx-log-out icon'></i>
                         <span class="text nav-text">Logout</span>
                     </a>

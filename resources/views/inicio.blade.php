@@ -2,13 +2,13 @@
 @section('redes')
 <div class="red">
     <div id="facebook">
-        <a href="https://www.facebook.com/angelica.mirandamendoza.9" target="none" class="fab fa-facebook-f "></a>
+        <a href="https://www.facebook.com/" target="none" class="fab fa-facebook-f "></a>
     </div>
     <div id="instagram">
-        <a href="https://www.instagram.com/angelicamiranda.m/" target="none" class="fab fa-instagram"></a>
+        <a href="https://www.instagram.com/" target="none" class="fab fa-instagram"></a>
     </div>
     <div id="twiter">
-        <a href="https://twitter.com/MirandaMedoza" target="none" class="fab fa-twitter-square"></a>
+        <a href="https://twitter.com/" target="none" class="fab fa-twitter-square"></a>
     </div>
     <div id="whatsaap">
         <a href="#" target="none" class="fab fa-whatsapp"></a>
@@ -29,16 +29,16 @@
 @endsection
 @section('navbar')
     <header>
-    <a href="#" class="logo">
+    <a href="#" class="logo" >
         
-        <img  class="imgtamaño" src="{{ asset('images/logo.png')}}" alt="Protecting You">
+        <img  class="imgtamaño" src="{{ asset('images/logo.png')}}" alt="QSTUDIO">
     </a>
     <div class="menu-toggle" ></div>
         <nav>
             <ul>
-                <li><a href="" class="active">INICIO</a></li>
-                <li><a href="">CONTÁCTENOS</a></li>
-                <li><a href="">NOSOTROS</a></li>
+                <li><a href="#inicio" class="active">INICIO</a></li>
+               {{--  <li><a href="#contactenos">CONTÁCTENOS</a></li> --}}
+                {{-- <li><a href="">NOSOTROS</a></li> --}}
 				<li><a href="login">LOGIN</a></li>
 				<li><a href="register">REGISTRATE</a></li>
                 {{-- <li><a href="" class="active">INICIO</a></li>
@@ -60,7 +60,7 @@
                         <h4> </h4>
 						<br>
 						<br>
-                        <h1 class="tipeo1">PROTECTING YOU</h1>
+                        <h1 class="tipeo1">QSTUDIO</h1>
                         <h1 class="tipeo2"><span class="type"></span></h1>
                         <div class="botonesinfo">
                         </div>
@@ -166,7 +166,7 @@
 @endsection
 
 @section('footer')
-<footer class="footer">
+<footer id="#contactenos" class="footer">
     <div class="l-footer">
         <img  class="footer_img" src="{{asset('images/logo-sin-background.png')}}" alt="Protecting You">
       

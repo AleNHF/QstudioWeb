@@ -22,7 +22,7 @@ class Login extends Component
     }
 
     public function submit()
-    {
+    { 
        $this->validate([
         'email' => 'required|email',
         'password' => 'required'
