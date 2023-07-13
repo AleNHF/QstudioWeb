@@ -2,13 +2,13 @@
     <!--begin::Authentication - Sign-in -->
     <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="margin: 0px;
     padding: 0px;
-    background: url(img/ninos.jpg) no-repeat center top ;
+    background: url(images/family2.jpg) no-repeat center top ;
     background-size: cover;">
         <!--begin::Content-->
         <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
             <!--begin::Logo-->
             <a href="#" class="mb-10">
-                <img alt="Logo" src="../../img/lgoo.png" class="h-100px" />
+                <img alt="Logo" src="../../images/logo-sin-background.png" class="h-100px" />
             </a>
             <!--end::Logo-->
             <!--begin::Wrapper-->

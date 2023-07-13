@@ -10,13 +10,15 @@
         "cboden/ratchet": "^0.4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "laravel/cashier": "^13.17",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "league/flysystem-aws-s3-v3": "1.0.29",
         "livewire/livewire": "^2.12",
         "nesbot/carbon": "^2.68",
-        "pusher/pusher-php-server": "^7.2"
+        "pusher/pusher-php-server": "^7.2",
+        "stripe/stripe-php": "^9.9"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -2,13 +2,13 @@
     <!--begin::Authentication - Sign-up -->
     <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="margin: 0px;
     padding: 0px;
-    background: url(img/ninos.jpg) no-repeat center top ;
+    background: url(images/familygo.jpg) no-repeat center top ;
     background-size: cover;">
         <!--begin::Content-->
         <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
             <!--begin::Logo-->
             <a href="../../demo1/dist/index.html" class="mb-12">
-                <img alt="Logo" src="../img/logowhite.png" class="h-80px" />
+                <img alt="Logo" src="../images/logo-sin-background.png" class="h-80px" />
             </a>
             <!--end::Logo-->
             <!--begin::Wrapper-->
@@ -25,7 +25,7 @@
                         <!--end::Title-->
                         <!--begin::Link-->
                         <div class="text-gray-400 fw-bold fs-4">Tienes una cuenta?
-                        {{-- <a href="{{ route('login') }}" class="link-primary fw-bolder">Iniciar aqui</a></div> --}}
+                        <a href="login" class="link-primary fw-bolder">Iniciar aqui</a></div>
                         <!--end::Link-->
                     </div>
                     <!--end::Heading-->

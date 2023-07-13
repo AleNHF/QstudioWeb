@@ -51,7 +51,12 @@ Route::get('/prueba', function () {
 });
 
 Route::get('/register', Register::class)->name('register.render');
-Route::get('/login', Login::class)->name('login');
+Route::get('/login', Login::class)->name('login.render');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/plan', [App\Http\Controllers\UserController::class, 'plan'])->name('plan');
+    Route::get('/success', [App\Http\Controllers\UserController::class, 'success'])->name('success');
+    Route::post('/plan', [App\Http\Controllers\UserController::class, 'checkout'])->name('checkout');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/children', ChildrenComponent::class)->name('children.render');
@@ -64,3 +69,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/token', TokenComponet::class)->name('token.render');
 
 });
+
+

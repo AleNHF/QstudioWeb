@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Subscription;
+use App\Models\Plans;
 use Illuminate\Http\Request;
 
-class SuscriptionsController extends Controller
+class PlansController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class SuscriptionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Suscriptions  $suscriptions
+     * @param  \App\Models\Plans  $Plans
      * @return \Illuminate\Http\Response
      */
-    public function show(Subscription $Subscription)
+    public function show(Plans $Plans)
     {
         //
     }
@@ -52,10 +52,10 @@ class SuscriptionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Subscription  $Subscription
+     * @param  \App\Models\Plans  $Plans
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subscription $Subscription)
+    public function edit(Plans $Plans)
     {
         //
     }
@@ -64,10 +64,10 @@ class SuscriptionsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subscription  $Subscription
+     * @param  \App\Models\Plans  $Plans
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subscription $Subscription)
+    public function update(Request $request, Plans $Plans)
     {
         //
     }
@@ -75,10 +75,10 @@ class SuscriptionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Subscription  $Subscription
+     * @param  \App\Models\Plans  $Plans
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subscription $Subscription)
+    public function destroy(Plans $Plans)
     {
         //
     }
