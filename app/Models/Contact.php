@@ -19,4 +19,7 @@ class Contact extends Model
     {
         return $this->belongsTo(Children::class, 'children_id');
     }
+    public function calls(){
+        return $this->hasMany(Call::class,'contact_id');
+    }
 }

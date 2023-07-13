@@ -42,9 +42,11 @@
                                 <thead style="font-family: Poppins;">
                                     <tr class="fw-bolder text-muted bg-light">
                                         <th class="ps-4 min-w-8px rounded-start">#</th>
-                                        <th class="min-w-125px">Estado de Llamada</th>
+                                        <th class="min-w-125px">Tipo de Llamada</th>
                                         <th class="min-w-125px">Fecha</th>
                                         <th class="min-w-125px">Duracion</th>
+                                        <th class="min-w-125px">Nombre</th>
+                                        <th class="min-w-125px">Numero</th>
 
                                     </tr>
                                 </thead>
@@ -58,14 +60,16 @@
                                 
                                             <td>
                                                 @if ($call->received)
-                                                    <label class="text-success">recibido</i> <!-- Icono para llamada recibida -->
+                                                    <label class="text-success">recibido</i> 
                                                 @else
-                                                    <<label class=" text-danger">rechasado</i> <!-- Icono para llamada rechazada -->
+                                                    <<label class=" text-danger">rechasado</i> 
                                                 @endif
                                             </td>
                                        
                                         <td>{{ $call->date  }}</td>
                                         <td>{{ $call->duration }}</td>
+                                         <td>{{ $call->duration }}</td>
+                                          <td>{{ $call->duration }}</td>
 
                                     </tr>
 
