@@ -8,6 +8,7 @@ use App\Notifications\ContentNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
+use Pusher\Pusher;
 
 class ContentNotificationListener
 {
@@ -80,8 +81,26 @@ class ContentNotificationListener
 
         if (count($user->expotokens) > 0) {
             $recipient = $user->expotokens[0]->expo_token;
+
+            $pusher = new Pusher(
+                env('PUSHER_APP_KEY'),
+                env('PUSHER_APP_SECRET'),
+                env('PUSHER_APP_ID'),
+                [
+                    'cluster' => env('PUSHER_APP_CLUSTER'),
+                    'useTLS' => true,
+                ]
+            );
+
+            $pusher->trigger('canal', 'notification', [
+                'body' => "Tu hij@ está mirando " . $nameData[$event->content->contentData],
+                'title' => 'Qstodio',
+                'data' => $data
+            ]);
+        
+
             // You can quickly bootup an expo instance
-            $expo = \ExponentPhpSDK\Expo::normalSetup();
+            /* $expo = \ExponentPhpSDK\Expo::normalSetup();
             // Subscribe the recipient to the server
             $expo->subscribe('canal', $recipient);
             // Build the notification data
@@ -94,7 +113,7 @@ class ContentNotificationListener
                 'data'=>$data
             ];
             // Notify an interest with a notification
-            $expo->notify(['canal'], $notification);
+            $expo->notify(['canal'], $notification); */
         }
     }
 }

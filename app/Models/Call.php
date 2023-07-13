@@ -27,7 +27,7 @@ class Call extends Model
             ->join('children', 'children.id', '=', 'contacts.children_id')
             ->where('contacts.children_id', '=', $childId)
             ->orderBy('calls.date', 'asc')
-            ->select('calls.*', 'contacts.*')
+            ->select('calls.*', 'contacts.name',  'contacts.phoneNumber')
             ->get()
             ->groupBy(function ($call) {
                 $date = Carbon::parse($call->date);
