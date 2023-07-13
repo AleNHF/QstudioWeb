@@ -15,9 +15,10 @@ class CreateCallsTable extends Migration
     {
         Schema::create('calls', function (Blueprint $table) {
             $table->id();
-            $table->boolean('received');
+            $table->boolean('received')->nullable();
             $table->date('date');
             $table->string('duration')->nullable();
+            $table->string('type')->nullable();
             $table->unsignedBigInteger('contact_id');
             $table->timestamps();
 

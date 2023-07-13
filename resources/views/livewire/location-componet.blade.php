@@ -1,6 +1,4 @@
-@extends('layouts.app')
 
-@section('content')
     <div>
         <div class="container-fluid d-flex justify-content-center aling-items-center">
             <div class="card content" style="width: 100%;">
@@ -12,14 +10,44 @@
                     </div>
                     <br>
                     <div class="row align-items-center" {{--  data-bs-target="#formaNav" --}}>
-                        <div class="col-6">
-                            <div wire:ignore id="map" style="width:500px;height:500px;"></div>
+                        <div class="col-5">
+                            <div wire:ignore id="map" style="width:400px;height:500px;"></div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-7">
+                            
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input class="form-control text-left mr-2" type="date" wire:model="fechaInicio"
+                                            wire:change="getTime()">
+                                        <label class="ml-3 form-control-placeholder" id="start-p" for="start">fecha
+                                            inicio</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input class="form-control text-left mr-2" type="date" wire:model="fechaFin"
+                                            wire:change="getTime()">
+                                        <label class="ml-3 form-control-placeholder" id="end-p" for="end">fecha fin</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input class="form-control text-left mr-2" type="time" wire:model="horaInicio"
+                                            wire:change="getTime()">
+                                        <label class="ml-3 form-control-placeholder" id="start-p" for="start">hora
+                                            inicio</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input class="form-control text-left mr-2" type="time" wire:model="horaFin"
+                                            wire:change="getTime()">
+                                        <label class="ml-3 form-control-placeholder" id="end-p" for="end">hora fin</label>
+                                    </div>
+                                </div>
+    
+                            </div>
+                            <br>
                             <div class=" text-center mb-10">
                                 <h3>Historial de Ubicaciones</h3>
                             </div>
                             <div class="card-body py-3 w-100" style="height: 400px; overflow: auto;">
+
                                 <table class="table table-hover ">
                                     <thead style="font-family: Poppins;">
                                         <tr class="fw-bolder text-muted bg-light">
@@ -30,6 +58,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    
                                         @foreach ($locations as $location)
                                             <tr data-latitud="{{ $location->lat }}" data-longitud="{{ $location->lng }}">
                                                 <td>{{ $location->date }}</td>
@@ -47,7 +76,7 @@
             </div>
         </div>
     </div>
-@endsection
+
 
 @section('js')
     <script>
@@ -130,4 +159,4 @@
             initMap();
         });
     </script>
-@endsection
+@endsection 

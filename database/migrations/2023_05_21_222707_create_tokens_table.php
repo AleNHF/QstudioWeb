@@ -19,7 +19,7 @@ class CreateTokensTable extends Migration
             $table->dateTime('createDate');
             $table->char('status', 1);
             $table->dateTime('registerDate')->nullable();
-            $table->boolean('active')->default(false);
+            $table->boolean('active')->default(true);
             $table->unsignedBigInteger('children_id');
             $table->timestamps();
 
