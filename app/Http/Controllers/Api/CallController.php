@@ -6,6 +6,7 @@ use App\Models\Call;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController as BaseController;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,11 +36,21 @@ class CallController extends BaseController
     {
         $callModel = new Call();
         $calls = $callModel->getCallsxChild($childrenId);
+        // $calls = ($callModel->getCallsxChild($childrenId))->groupBy('date');
 
         if (isset($calls)) {
-            return $this->sendResponse($calls, 'Listado de llamadas por niño');
+            $data = new Collection();
+            $aux= new Collection();
+            foreach ($calls as $key => $value) {
+                $aux->push(["date" => $value[0]->date, "data" => $value]);
+                // return('good');
+                // $aux->push(["data" => $value]);
+
+                $data->push($aux);
+            }
+            return $this->sendResponse($aux, 'Listado de llamadas por niño');
         }
-       
+
         return $this->sendError('Algo salió mal');
     }
 

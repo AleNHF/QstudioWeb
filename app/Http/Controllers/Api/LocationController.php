@@ -85,25 +85,42 @@ class LocationController extends BaseController
         $tutor = Tutor::find($kid->tutor_id);
 
         if (Auth::user()->id == $tutor->user_id) {
+            // $locations = Location::where('children_id', $kid->id)
+            //     ->orderBy('date', 'asc')
+            //     ->get()
+            //     ->groupBy('date')
+            //     ->map(function ($group) {
+            //         return $group->map(function ($location) {
+            //             $aux= explode(",", $location->coordinates);
+            //             return [
+            //                 'time' => $location->time,
+            //                 'date' => $location->date,
+            //                 // 'longitude' => $location->coordinates,
+            //                 'longitude' => substr($aux[0], 1),
+            //                 // 'latitude' => $aux[1],
+            //                 'latitude' => substr($aux[1], 0, -1)
+
+            //             ];
+            //         });
+            //     });
+
             $locations = Location::where('children_id', $kid->id)
                 ->orderBy('date', 'asc')
-                ->get()
-                ->groupBy('date')
-                ->map(function ($group) {
-                    return $group->map(function ($location) {
-                        return [
-                            'time' => $location->time,
-                            'longitude' => $location->lng,
-                            'latitude' => $location->lat,
-                        ];
-                    });
-                });
+                ->get();
 
-            return $this->sendResponse($locations, "List of locations grouped by date");
+            $modifiedLocations = $locations->map(function ($location) {
+                $aux = explode(",", $location->coordinates);
+                return [
+                    'id' => $location->id,
+                    'time' => $location->time,
+                    'date' => $location->date,
+                    'longitude' => substr($aux[0], 1),
+                    'latitude' => substr($aux[1], 0, -1)
+                ];
+            });
+            return $this->sendResponse($modifiedLocations, "List of locations grouped by date");
         }
 
         return $this->sendError("No Content.", 204);
     }
-
-
 }
