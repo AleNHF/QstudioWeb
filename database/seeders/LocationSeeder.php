@@ -25,7 +25,7 @@ class LocationSeeder extends Seeder
         Location::create([
             'coordinates' => 'longitud:-63.186886,latitud:-17.789218',
             'time' => '08:35',
-            'date' => '05-2023-05-30',
+            'date' => '2023-05-30',
             'children_id' => 1
         ]);
 
