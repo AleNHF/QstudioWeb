@@ -79,8 +79,8 @@ class ContentNotificationListener
             'path' => $event->content->url
         ];
 
-        if (count($user->expotokens) > 0) {
-            $recipient = $user->expotokens[0]->expo_token;
+        //if (count($user->expotokens) > 0) {
+            $recipients = User::whereNotNull('device_token')->pluck('device_token')->toArray();
 
             $pusher = new Pusher(
                 env('PUSHER_APP_KEY'),
@@ -97,6 +97,17 @@ class ContentNotificationListener
                 'title' => 'Qstodio',
                 'data' => $data
             ]);
+
+            // FIREBASE
+            fcm()
+            ->to($recipients)
+            ->priority('high')
+            ->timeToLive(0)
+            ->notifications([
+                'title' => 'Qstodio',
+                'body' => "Tu hij@ está mirando " . $nameData[$event->content->contentData],
+            ])
+            ->send();
         
 
             // You can quickly bootup an expo instance
@@ -114,6 +125,6 @@ class ContentNotificationListener
             ];
             // Notify an interest with a notification
             $expo->notify(['canal'], $notification); */
-        }
+        //}
     }
 }
