@@ -65,8 +65,9 @@ class Register extends Component
         ]);
 
 
+        $stripeCustomer = $user->createAsStripeCustomer();
         Auth::login($user);
-        return redirect()->to('/children');
+        return redirect()->to('/plan');
         // if(Auth::login($user)) {
         // }
 

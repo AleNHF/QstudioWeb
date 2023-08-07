@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Planes extends Model
+class Plans extends Model
 {
     use HasFactory;
 
@@ -17,12 +17,10 @@ class Planes extends Model
         'status',
     ];
 
-    public function tutor()
+    public function planesTutor()
     {
-        return $this->hasMany(Tutor::class, 'plan_id');
+        return $this->hasMany('App\Models\PlanTutor','plan_id','id');
     }
 
-    public function subscription(){
-        return $this->hasMany('App\Models\Subscription');
-    }
+
 }

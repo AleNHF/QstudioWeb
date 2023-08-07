@@ -4,24 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Subscription extends Model
+class PlanTutor extends Model
 {
     use HasFactory;
 
+
+    // protected $table ='plan_tutor';
+
+
     protected $fillable = [
-        'startDate',
-        'startEnd',
-        'price',
         'plan_id',
         'tutor_id',
+        'activo',
+        'fecha_inicio',
+        'fecha_fin',
     ];
-
     public function plan(){
-        return $this->belongsTo('App\Models\Plan');
+        return $this->BelongsTo('App\Models\Plan');
     }
-
     public function tutor(){
-        return $this->belongsTo('App\Models\Tutor');
+        return $this->BelongsTo('App\Models\Tutor');
     }
 }
